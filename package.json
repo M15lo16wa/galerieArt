@@ -1,0 +1,17 @@
+{
+  "name": "ejs",
+  "version": "1.0.0",
+  "description": "application d'exposition et vente d'oeuvre d'art",
+  "license": "ISC",
+  "author": "",
+  "type": "commonjs",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "ejs": "^4.0.1",
+    "express": "^5.2.1"
+  }
+}
