@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Créer un compte | ArtExpo</title>
+    <link rel="stylesheet" href="/css/auth.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body class="auth-page">
+
+    <div class="auth-container auth-container--wide">
+
+        <a href="/" class="auth-logo">ArtExpo</a>
+
+        <div class="auth-card"
+             data-init-step="<%= (errors && errors.length && body.role) ? '2' : '1' %>"
+             data-init-role="<%= body.role || '' %>"
+             data-init-subrole="<%= body.subRole || '' %>">
+
+            <!-- Indicateur d'étapes -->
+            <div class="step-indicator">
+                <div class="step-indicator__dot" id="dot-1"></div>
+                <div class="step-indicator__dot" id="dot-2"></div>
+            </div>
+
+            <% if (errors && errors.length) { %>
+                <ul class="auth-errors">
+                    <% errors.forEach(e => { %>
+                        <li><i class="fa-solid fa-circle-exclamation"></i> <%= e %></li>
+                    <% }) %>
+                </ul>
+            <% } %>
+
+            <form method="POST" action="/auth/register" id="register-form">
+
+                <!-- Champs cachés transmis au serveur -->
+                <input type="hidden" name="role"    id="role-input">
+                <input type="hidden" name="subRole" id="subRole-input">
+
+                <!-- ===== ÉTAPE 1 : Identifiants ===== -->
+                <div class="step" id="step-1">
+
+                    <h1 class="auth-card__title">Créer un compte</h1>
+
+                    <div class="auth-form">
+
+                        <div class="form-group">
+                            <label for="email">Adresse email</label>
+                            <input
+                                type="email"
+                                id="email"
+                                name="email"
+                                placeholder="votre@email.com"
+                                autocomplete="email"
+                                value="<%= body.email || '' %>"
+                            >
+                            <span class="field-error" id="err-email"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="password">Mot de passe</label>
+                            <div class="input-password">
+                                <input
+                                    type="password"
+                                    id="password"
+                                    name="password"
+                                    placeholder="8 caractères minimum"
+                                    autocomplete="new-password"
+                                >
+                                <button type="button" class="toggle-password" data-target="password" aria-label="Afficher">
+                                    <i class="fa-solid fa-eye"></i>
+                                </button>
+                            </div>
+                            <span class="field-error" id="err-password"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="confirmPassword">Confirmer le mot de passe</label>
+                            <div class="input-password">
+                                <input
+                                    type="password"
+                                    id="confirmPassword"
+                                    name="confirmPassword"
+                                    placeholder="••••••••"
+                                    autocomplete="new-password"
+                                >
+                                <button type="button" class="toggle-password" data-target="confirmPassword" aria-label="Afficher">
+                                    <i class="fa-solid fa-eye"></i>
+                                </button>
+                            </div>
+                            <span class="field-error" id="err-confirm"></span>
+                        </div>
+
+                        <button type="button" class="btn btn--primary btn--full" id="btn-next">
+                            Suivant &nbsp;<i class="fa-solid fa-arrow-right"></i>
+                        </button>
+
+                    </div>
+
+                </div>
+
+                <!-- ===== ÉTAPE 2 : Choix du profil ===== -->
+                <div class="step" id="step-2">
+
+                    <h1 class="auth-card__title">Quel est votre profil ?</h1>
+
+                    <!-- Cards de sélection -->
+                    <div class="profile-cards">
+
+                        <div class="profile-card" data-role="artiste">
+                            <i class="fa-solid fa-paintbrush profile-card__icon"></i>
+                            <span class="profile-card__name">Artiste</span>
+                        </div>
+
+                        <div class="profile-card" data-role="amateur">
+                            <i class="fa-regular fa-heart profile-card__icon"></i>
+                            <span class="profile-card__name">Amateur d'art</span>
+                        </div>
+
+                        <div class="profile-card" data-role="organisation">
+                            <i class="fa-solid fa-building-columns profile-card__icon"></i>
+                            <span class="profile-card__name">Compte Multi-Artiste</span>
+                        </div>
+
+                    </div>
+
+                    <span class="field-error" id="err-role" style="display:block; text-align:center; margin:0.5rem 0;"></span>
+
+                    <!-- Sous-profils (visible uniquement si organisation) -->
+                    <div class="sub-roles" id="sub-roles">
+
+                        <p class="sub-roles__title">Précisez le type d'organisation :</p>
+
+                        <label class="sub-role-option">
+                            <input type="radio" name="subRoleRadio" value="galerie">
+                            <span>Galerie d'art</span>
+                        </label>
+
+                        <label class="sub-role-option">
+                            <input type="radio" name="subRoleRadio" value="association">
+                            <span>Association</span>
+                        </label>
+
+                        <label class="sub-role-option">
+                            <input type="radio" name="subRoleRadio" value="collectif">
+                            <span>Collectif d'artiste</span>
+                        </label>
+
+                        <label class="sub-role-option">
+                            <input type="radio" name="subRoleRadio" value="agent">
+                            <span>Agent artistique</span>
+                        </label>
+
+                    </div>
+
+                    <span class="field-error" id="err-subrole" style="display:block; text-align:center; margin:0.5rem 0;"></span>
+
+                    <div class="form-nav">
+                        <button type="button" class="btn btn--ghost" id="btn-back">
+                            <i class="fa-solid fa-arrow-left"></i> &nbsp;Retour
+                        </button>
+                        <button type="submit" class="btn btn--primary" id="btn-submit">
+                            Créer mon compte
+                        </button>
+                    </div>
+
+                </div>
+
+            </form>
+
+            <p class="auth-card__footer">
+                Déjà un compte ? <a href="/auth/login">Se connecter</a>
+            </p>
+
+        </div>
+
+    </div>
+
+    <script>
+        // ----- Références DOM -----
+        const card    = document.querySelector('.auth-card');
+        const step1   = document.getElementById('step-1');
+        const step2   = document.getElementById('step-2');
+        const dot1    = document.getElementById('dot-1');
+        const dot2    = document.getElementById('dot-2');
+        const subRolesPanel = document.getElementById('sub-roles');
+
+        // ----- Helpers navigation d'étapes -----
+        function goToStep(n) {
+            if (n === 1) {
+                step1.classList.add('active');
+                step2.classList.remove('active');
+                dot1.classList.add('active');
+                dot1.classList.remove('done');
+                dot2.classList.remove('active');
+            } else {
+                step1.classList.remove('active');
+                step2.classList.add('active');
+                dot1.classList.remove('active');
+                dot1.classList.add('done');
+                dot2.classList.add('active');
+            }
+        }
+
+        // ----- Initialisation selon l'état serveur (erreurs POST) -----
+        const initStep    = card.dataset.initStep    || '1';
+        const initRole    = card.dataset.initRole    || '';
+        const initSubrole = card.dataset.initSubrole || '';
+
+        goToStep(parseInt(initStep, 10));
+
+        if (initRole) {
+            document.getElementById('role-input').value = initRole;
+            const card_ = document.querySelector(`[data-role="${initRole}"]`);
+            if (card_) card_.classList.add('selected');
+            if (initRole === 'organisation') {
+                subRolesPanel.classList.add('visible');
+                if (initSubrole) {
+                    document.getElementById('subRole-input').value = initSubrole;
+                    const radio = document.querySelector(`input[name="subRoleRadio"][value="${initSubrole}"]`);
+                    if (radio) radio.checked = true;
+                }
+            }
+        }
+
+        // ----- Toggle visibilité mot de passe -----
+        document.querySelectorAll('.toggle-password').forEach(btn => {
+            btn.addEventListener('click', function () {
+                const input = document.getElementById(this.dataset.target);
+                const icon  = this.querySelector('i');
+                if (input.type === 'password') {
+                    input.type = 'text';
+                    icon.classList.replace('fa-eye', 'fa-eye-slash');
+                } else {
+                    input.type = 'password';
+                    icon.classList.replace('fa-eye-slash', 'fa-eye');
+                }
+            });
+        });
+
+        // ----- Validation étape 1 (client) -----
+        function validateStep1() {
+            const email   = document.getElementById('email').value.trim();
+            const pwd     = document.getElementById('password').value;
+            const confirm = document.getElementById('confirmPassword').value;
+            let valid = true;
+
+            document.getElementById('err-email').textContent    = '';
+            document.getElementById('err-password').textContent = '';
+            document.getElementById('err-confirm').textContent  = '';
+
+            if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+                document.getElementById('err-email').textContent = 'Adresse email invalide.';
+                valid = false;
+            }
+            if (pwd.length < 8) {
+                document.getElementById('err-password').textContent = 'Minimum 8 caractères.';
+                valid = false;
+            }
+            if (pwd !== confirm) {
+                document.getElementById('err-confirm').textContent = 'Les mots de passe ne correspondent pas.';
+                valid = false;
+            }
+            return valid;
+        }
+
+        document.getElementById('btn-next').addEventListener('click', () => {
+            if (validateStep1()) goToStep(2);
+        });
+
+        document.getElementById('btn-back').addEventListener('click', () => goToStep(1));
+
+        // ----- Sélection des cards de profil -----
+        document.querySelectorAll('.profile-card').forEach(c => {
+            c.addEventListener('click', function () {
+                document.querySelectorAll('.profile-card').forEach(x => x.classList.remove('selected'));
+                this.classList.add('selected');
+
+                const role = this.dataset.role;
+                document.getElementById('role-input').value = role;
+                document.getElementById('err-role').textContent = '';
+
+                if (role === 'organisation') {
+                    subRolesPanel.classList.add('visible');
+                } else {
+                    subRolesPanel.classList.remove('visible');
+                    document.getElementById('subRole-input').value = '';
+                    document.querySelectorAll('input[name="subRoleRadio"]').forEach(r => r.checked = false);
+                }
+            });
+        });
+
+        // ----- Sélection du sous-profil -----
+        document.querySelectorAll('input[name="subRoleRadio"]').forEach(radio => {
+            radio.addEventListener('change', function () {
+                document.getElementById('subRole-input').value = this.value;
+                document.getElementById('err-subrole').textContent = '';
+            });
+        });
+
+        // ----- Validation avant soumission (client) -----
+        document.getElementById('register-form').addEventListener('submit', function (e) {
+            const role    = document.getElementById('role-input').value;
+            const subRole = document.getElementById('subRole-input').value;
+            let valid = true;
+
+            document.getElementById('err-role').textContent    = '';
+            document.getElementById('err-subrole').textContent = '';
+
+            if (!role) {
+                document.getElementById('err-role').textContent = 'Veuillez choisir un profil.';
+                valid = false;
+            }
+            if (role === 'organisation' && !subRole) {
+                document.getElementById('err-subrole').textContent = "Veuillez préciser le type d'organisation.";
+                valid = false;
+            }
+            if (!valid) e.preventDefault();
+        });
+    </script>
+
+</body>
+</html>

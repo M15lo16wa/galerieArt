@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Connexion | ArtExpo</title>
+    <link rel="stylesheet" href="/css/auth.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body class="auth-page">
+
+    <div class="auth-container">
+
+        <a href="/" class="auth-logo">ArtExpo</a>
+
+        <div class="auth-card">
+
+            <h1 class="auth-card__title">Connexion</h1>
+
+            <% if (errors && errors.length) { %>
+                <ul class="auth-errors">
+                    <% errors.forEach(e => { %>
+                        <li><i class="fa-solid fa-circle-exclamation"></i> <%= e %></li>
+                    <% }) %>
+                </ul>
+            <% } %>
+
+            <form method="POST" action="/auth/login" class="auth-form">
+
+                <div class="form-group">
+                    <label for="email">Adresse email</label>
+                    <input
+                        type="email"
+                        id="email"
+                        name="email"
+                        placeholder="votre@email.com"
+                        autocomplete="email"
+                        required
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label for="password">Mot de passe</label>
+                    <div class="input-password">
+                        <input
+                            type="password"
+                            id="password"
+                            name="password"
+                            placeholder="••••••••"
+                            autocomplete="current-password"
+                            required
+                        >
+                        <button type="button" class="toggle-password" aria-label="Afficher le mot de passe">
+                            <i class="fa-solid fa-eye"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn btn--primary btn--full">
+                    Se connecter
+                </button>
+
+            </form>
+
+            <p class="auth-card__footer">
+                Pas encore de compte ? <a href="/auth/register">S'inscrire</a>
+            </p>
+
+        </div>
+
+    </div>
+
+    <script>
+        document.querySelector('.toggle-password').addEventListener('click', function () {
+            const input = document.getElementById('password');
+            const icon  = this.querySelector('i');
+            if (input.type === 'password') {
+                input.type = 'text';
+                icon.classList.replace('fa-eye', 'fa-eye-slash');
+            } else {
+                input.type = 'password';
+                icon.classList.replace('fa-eye-slash', 'fa-eye');
+            }
+        });
+    </script>
+
+</body>
+</html>
