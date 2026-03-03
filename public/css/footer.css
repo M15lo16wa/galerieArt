@@ -1,0 +1,196 @@
+/* =========================================
+   FOOTER
+   ========================================= */
+
+.footer {
+    background-color: #0d0d0d;
+    color: #ccc;
+    font-size: 0.875rem;
+    margin-top: auto;
+}
+
+/* --- Zone principale avec les colonnes --- */
+.footer-main {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    padding: 2.5rem 3rem;
+    border-bottom: 1px solid #2a2a2a;
+}
+
+/* --- Colonnes génériques --- */
+.footer-col {
+    flex: 1 1 150px;
+    min-width: 140px;
+}
+
+.footer-col-title {
+    color: #ffffff;
+    font-size: 0.95rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    letter-spacing: 0.02em;
+}
+
+/* --- Listes de liens --- */
+.footer-links {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.footer-links a {
+    color: #aaa;
+    text-decoration: none;
+    transition: color 0.2s ease;
+    line-height: 1.4;
+}
+
+.footer-links a:hover {
+    color: #ffffff;
+}
+
+/* --- Icônes réseaux sociaux --- */
+.footer-social {
+    display: flex;
+    gap: 0.6rem;
+    margin-top: 1.2rem;
+    flex-wrap: wrap;
+}
+
+.social-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background-color: #2a2a2a;
+    color: #ffffff;
+    font-size: 0.9rem;
+    text-decoration: none;
+    transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.social-icon:hover {
+    background-color: #444;
+    transform: translateY(-2px);
+}
+
+/* --- Colonne avis clients --- */
+.footer-reviews {
+    flex: 0 1 190px;
+    border-left: 1px solid #2a2a2a;
+    padding-left: 2rem;
+}
+
+.reviews-count {
+    color: #ffffff;
+    font-weight: 600;
+    font-size: 0.9rem;
+    margin-bottom: 0.4rem;
+}
+
+.reviews-rating {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    margin-bottom: 0.6rem;
+}
+
+.reviews-score {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: #ffffff;
+}
+
+.reviews-rating .fa-star {
+    color: #f5a623;
+    font-size: 1rem;
+}
+
+.reviews-label {
+    font-size: 1rem;
+    color: #cccccc;
+    font-weight: 500;
+}
+
+.reviews-desc {
+    font-size: 0.8rem;
+    color: #888;
+    line-height: 1.5;
+}
+
+/* --- Barre du bas --- */
+.footer-bottom {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    padding: 0.9rem 3rem;
+    font-size: 0.8rem;
+    color: #777;
+}
+
+.footer-bottom-left {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    flex-wrap: wrap;
+}
+
+.footer-bottom-left a {
+    color: #777;
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.footer-bottom-left a:hover {
+    color: #ccc;
+}
+
+.footer-flag {
+    font-size: 1rem;
+}
+
+.footer-sep {
+    color: #444;
+}
+
+.footer-bottom-right {
+    color: #555;
+}
+
+.footer-bottom-right span {
+    font-weight: 500;
+}
+
+/* --- Responsive --- */
+@media (max-width: 900px) {
+    .footer-main {
+        padding: 2rem 1.5rem;
+        gap: 1.5rem;
+    }
+
+    .footer-reviews {
+        border-left: none;
+        padding-left: 0;
+        border-top: 1px solid #2a2a2a;
+        padding-top: 1.2rem;
+        flex: 1 1 100%;
+    }
+}
+
+@media (max-width: 600px) {
+    .footer-col {
+        flex: 1 1 45%;
+    }
+
+    .footer-bottom {
+        padding: 0.9rem 1.5rem;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}
