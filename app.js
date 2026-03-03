@@ -1,14 +1,14 @@
 const express = require('express');
-const path    = require('path');
+const path = require('path');
 
-const indexRouter        = require('./src/routes/index');
-const authRouter         = require('./src/routes/auth');
-const amateurRouter      = require('./src/routes/amateur');
-const artisteRouter      = require('./src/routes/artiste');
+const indexRouter = require('./src/routes/index');
+const authRouter = require('./src/routes/auth');
+const amateurRouter = require('./src/routes/amateur');
+const artisteRouter = require('./src/routes/artiste');
 const organisationRouter = require('./src/routes/organisation');
-const adminRouter        = require('./src/routes/admin');
+const adminRouter = require('./src/routes/admin');
 
-const app  = express();
+const app = express();
 const PORT = process.env.PORT || 4000;
 
 // --- Moteur de template ---
@@ -22,13 +22,20 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
+// --- Variables globales disponibles dans toutes les vues ---
+app.use((_req, res, next) => {
+    res.locals.user = null;        // sera remplace par la session apres auth
+    res.locals.title = 'ArtExpo';   // titre par defaut
+    next();
+});
+
 // --- Montage des routes (1 acteur = 1 routeur) ---
-app.use('/',             indexRouter);
-app.use('/auth',         authRouter);
-app.use('/amateur',      amateurRouter);
-app.use('/artiste',      artisteRouter);
+app.use('/', indexRouter);
+app.use('/auth', authRouter);
+app.use('/amateur', amateurRouter);
+app.use('/artiste', artisteRouter);
 app.use('/organisation', organisationRouter);
-app.use('/admin',        adminRouter);
+app.use('/admin', adminRouter);
 
 // --- Gestionnaire 404 ---
 app.use((_req, res) => res.status(404).send('Page introuvable'));

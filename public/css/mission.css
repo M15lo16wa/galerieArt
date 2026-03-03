@@ -1,0 +1,198 @@
+/* =========================================
+MISSION SECTION
+   ========================================= */
+
+/* ---- Hero ---- */
+.mission__hero {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  min-height: 280px;
+  padding: 4rem 2rem;
+
+  background:
+    linear-gradient(to bottom, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.7) 100%),
+    url('/images/image-section-centrale-4.jpg') center 30% / cover no-repeat;
+}
+
+.mission__hero-title {
+  font-size: 2.4rem;
+  font-weight: 900;
+  color: #ffffff;
+  letter-spacing: 0.02em;
+  margin-bottom: 1rem;
+}
+
+.mission__hero-sub {
+  font-size: 1rem;
+  color: #d0d0d0;
+  max-width: 65ch;
+  line-height: 1.6;
+  font-style: italic;
+}
+
+/* ---- Features row ---- */
+.mission__features {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  background: #0d0d0d;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.mission__feature {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  padding: 2rem 1.75rem;
+  border-right: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.mission__feature:last-child {
+  border-right: none;
+}
+
+.mission__feature-icon {
+  font-size: 1.5rem;
+  color: #808080;
+  line-height: 1;
+}
+
+.mission__feature-title {
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: #ffffff;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.mission__feature-desc {
+  font-size: 0.82rem;
+  color: #909090;
+  line-height: 1.6;
+}
+
+/* ---- Description block ---- */
+.mission__description {
+  background: #0a0a0a;
+  padding: 3rem 4rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.mission__description p {
+  font-size: 0.9rem;
+  color: #b8b8b8;
+  line-height: 1.8;
+}
+
+.mission__description-cta {
+  font-size: 0.85rem !important;
+  color: #d0d0d0 !important;
+}
+
+.mission__description-cta strong {
+  color: #ffffff;
+  letter-spacing: 0.03em;
+}
+
+/* =========================================
+   NEWSLETTER SECTION
+   ========================================= */
+
+.newsletter {
+  background: #1a1a1a;
+  border-top: 1px solid rgba(255, 255, 255, 0.07);
+  padding: 3rem 2rem;
+}
+
+.newsletter__inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 3rem;
+}
+
+.newsletter__text {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.newsletter__brand {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #606060;
+}
+
+.newsletter__title {
+  font-size: 1.6rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  color: #ffffff;
+  letter-spacing: 0.03em;
+}
+
+.newsletter__desc {
+  font-size: 0.875rem;
+  color: #909090;
+  max-width: 42ch;
+  line-height: 1.5;
+}
+
+/* ---- Form ---- */
+.newsletter__form {
+  display: flex;
+  gap: 0.75rem;
+  flex-shrink: 0;
+}
+
+.newsletter__input {
+  padding: 0.75rem 1.25rem;
+  width: 300px;
+  background: #2e2e2e;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  border-radius: 6px;
+  color: #ffffff;
+  font-size: 0.9rem;
+  outline: none;
+  transition: border-color 0.2s ease, background 0.2s ease;
+}
+
+.newsletter__input::placeholder {
+  color: #a0a0a0;
+}
+
+.newsletter__input:focus {
+  border-color: rgba(255, 255, 255, 0.5);
+}
+
+.newsletter__btn {
+  padding: 0.75rem 1.75rem;
+  background: #ffffff;
+  color: #000000;
+  font-weight: 700;
+  font-size: 0.9rem;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 0.2s ease, transform 0.15s ease;
+}
+
+.newsletter__btn:hover {
+  background: #e0e0e0;
+  transform: scale(1.02);
+}

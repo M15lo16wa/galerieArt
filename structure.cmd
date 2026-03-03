@@ -2,7 +2,7 @@
 :: ============================================================
 ::  Plateforme d'exposition et vente d'oeuvres d'art
 ::  Structure du projet - scaffold script
-::  Derniere mise a jour : 2026-02-27
+::  Derniere mise a jour : 2026-02-27 (v2)
 :: ============================================================
 
 echo [INFO] Creation de la structure du projet...
@@ -77,20 +77,24 @@ if not exist "src\views\amateur\profile.ejs"   type nul > "src\views\amateur\pro
 
 :: ------------------------------------------------------------
 :: VIEWS - Artiste (createur / vendeur)
-::   dashboard.ejs    : tableau de bord
-::   my-artworks.ejs  : liste de ses oeuvres publiees
-::   artwork-add.ejs  : ajouter une oeuvre
-::   artwork-edit.ejs : modifier une oeuvre
-::   sales.ejs        : suivi des ventes
-::   profile.ejs      : profil public de l'artiste
+::   dashboard.ejs      : tableau de bord
+::   my-artworks.ejs    : liste de ses oeuvres publiees
+::   artwork-add.ejs    : ajouter une oeuvre
+::   artwork-edit.ejs   : modifier une oeuvre
+::   exhibitions.ejs    : ses expositions (prerequis a la vente)
+::   exhibition-add.ejs : creer une exposition
+::   sales.ejs          : suivi des ventes
+::   profile.ejs        : profil public de l'artiste
 :: ------------------------------------------------------------
 if not exist "src\views\artiste" mkdir "src\views\artiste"
-if not exist "src\views\artiste\dashboard.ejs"    type nul > "src\views\artiste\dashboard.ejs"
-if not exist "src\views\artiste\my-artworks.ejs"  type nul > "src\views\artiste\my-artworks.ejs"
-if not exist "src\views\artiste\artwork-add.ejs"  type nul > "src\views\artiste\artwork-add.ejs"
-if not exist "src\views\artiste\artwork-edit.ejs" type nul > "src\views\artiste\artwork-edit.ejs"
-if not exist "src\views\artiste\sales.ejs"        type nul > "src\views\artiste\sales.ejs"
-if not exist "src\views\artiste\profile.ejs"      type nul > "src\views\artiste\profile.ejs"
+if not exist "src\views\artiste\dashboard.ejs"      type nul > "src\views\artiste\dashboard.ejs"
+if not exist "src\views\artiste\my-artworks.ejs"    type nul > "src\views\artiste\my-artworks.ejs"
+if not exist "src\views\artiste\artwork-add.ejs"    type nul > "src\views\artiste\artwork-add.ejs"
+if not exist "src\views\artiste\artwork-edit.ejs"   type nul > "src\views\artiste\artwork-edit.ejs"
+if not exist "src\views\artiste\exhibitions.ejs"    type nul > "src\views\artiste\exhibitions.ejs"
+if not exist "src\views\artiste\exhibition-add.ejs" type nul > "src\views\artiste\exhibition-add.ejs"
+if not exist "src\views\artiste\sales.ejs"          type nul > "src\views\artiste\sales.ejs"
+if not exist "src\views\artiste\profile.ejs"        type nul > "src\views\artiste\profile.ejs"
 
 :: ------------------------------------------------------------
 :: VIEWS - Organisation (galerie / musee)
@@ -136,7 +140,7 @@ echo  Acteurs couverts :
 echo   - Visiteur       : src/views/index.ejs
 echo   - Auth (commun)  : src/views/auth/
 echo   - Amateur        : src/views/amateur/        (7 vues)
-echo   - Artiste        : src/views/artiste/        (6 vues)
+echo   - Artiste        : src/views/artiste/        (8 vues)
 echo   - Organisation   : src/views/organisation/   (7 vues)
 echo   - Admin          : src/views/admin/          (6 vues)
 echo.
