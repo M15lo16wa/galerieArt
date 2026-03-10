@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mon Profil | ArtExpo</title>
+    <link rel="stylesheet" href="/css/artiste.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body class="artiste-page">
+
+    <aside class="sidebar" id="sidebar">
+
+        <a href="/" class="sidebar__logo">ArtExpo</a>
+
+        <!-- Mini-carte de l'artiste connecté -->
+        <div class="sidebar__mini-profil">
+            <div class="sidebar__mini-avatar">
+                <i class="fa-solid fa-user"></i>
+            </div>
+            <p class="sidebar__mini-nom">
+                <%= profilComplet ? artiste.prenom + ' ' + artiste.nom : 'Mon compte' %>
+            </p>
+            <span class="sidebar__mini-role">Artiste</span>
+        </div>
+
+        <nav class="sidebar__nav">
+
+            <!-- Tableau de bord -->
+            <a href="/artiste/dashboard" class="sidebar__lien">
+                <i class="fa-solid fa-gauge"></i>
+                <span>Tableau de bord</span>
+            </a>
+
+            <!-- Profil — lien actif -->
+            <a href="/artiste/profile" class="sidebar__lien sidebar__lien--actif">
+                <i class="fa-solid fa-user-pen"></i>
+                <span>Mon Profil</span>
+            </a>
+
+            <!-- Mes Oeuvres — bloqué si profil incomplet -->
+            <% if (profilComplet) { %>
+                <a href="/artiste/my-artworks" class="sidebar__lien">
+                    <i class="fa-solid fa-palette"></i>
+                    <span>Mes Oeuvres</span>
+                </a>
+            <% } else { %>
+                <span class="sidebar__lien sidebar__lien--bloque" title="Complétez votre profil pour accéder à cette section">
+                    <i class="fa-solid fa-palette"></i>
+                    <span>Mes Oeuvres</span>
+                    <i class="fa-solid fa-lock sidebar__lien-icone-verrou"></i>
+                </span>
+            <% } %>
+
+            <!-- Mes Expositions — bloqué si profil incomplet -->
+            <% if (profilComplet) { %>
+                <a href="/artiste/exhibitions" class="sidebar__lien">
+                    <i class="fa-solid fa-building-columns"></i>
+                    <span>Mes Expositions</span>
+                </a>
+            <% } else { %>
+                <span class="sidebar__lien sidebar__lien--bloque" title="Complétez votre profil pour accéder à cette section">
+                    <i class="fa-solid fa-building-columns"></i>
+                    <span>Mes Expositions</span>
+                    <i class="fa-solid fa-lock sidebar__lien-icone-verrou"></i>
+                </span>
+            <% } %>
+
+            <!-- Mes Ventes — bloqué si profil incomplet -->
+            <% if (profilComplet) { %>
+                <a href="/artiste/sales" class="sidebar__lien">
+                    <i class="fa-solid fa-chart-line"></i>
+                    <span>Mes Ventes</span>
+                </a>
+            <% } else { %>
+                <span class="sidebar__lien sidebar__lien--bloque" title="Complétez votre profil pour accéder à cette section">
+                    <i class="fa-solid fa-chart-line"></i>
+                    <span>Mes Ventes</span>
+                    <i class="fa-solid fa-lock sidebar__lien-icone-verrou"></i>
+                </span>
+            <% } %>
+
+        </nav>
+
+        <div class="sidebar__pied">
+            <a href="/auth/login" class="sidebar__deconnexion">
+                <i class="fa-solid fa-right-from-bracket"></i>
+                <span>Se déconnecter</span>
+            </a>
+        </div>
+
+    </aside>
+
+    <!-- Voile sombre mobile -->
+    <div class="sidebar-voile" id="sidebarVoile"></div>
+
+    <!-- =============================================
+         CONTENU PRINCIPAL
+         ============================================= -->
+    <main class="artiste-contenu">
+
+        <!-- En-tête -->
+        <div class="page-entete">
+            <h1 class="page-titre">Mon Profil</h1>
+            <p class="page-sous-titre">
+                <% if (!profilComplet) { %>
+                    Complétez vos informations pour débloquer toutes les fonctionnalités
+                <% } else { %>
+                    Gérez vos informations personnelles et artistiques
+                <% } %>
+            </p>
+        </div>
+
+        <!-- =============================================
+             BANDEAU ALERTE — affiché si profil incomplet
+             ============================================= -->
+        <% if (!profilComplet) { %>
+        <div class="alerte-profil">
+            <p class="alerte-profil__texte">
+                <i class="fa-solid fa-circle-exclamation"></i>
+                Votre profil est incomplet. Renseignez au minimum votre prénom, nom et discipline artistique pour pouvoir ajouter vos oeuvres et créer des expositions.
+            </p>
+            <div class="barre-progression">
+                <div class="barre-progression__etiquette">
+                    <span>Complétion du profil</span>
+                    <span><%= pourcentageCompletion %>%</span>
+                </div>
+                <div class="barre-progression__fond">
+                    <div class="barre-progression__rempli" style="width: <%= pourcentageCompletion %>%;"></div>
+                </div>
+            </div>
+        </div>
+        <% } %>
+
+        <!-- =============================================
+             HERO PROFIL — avatar, infos, statistiques
+             ============================================= -->
+        <div class="profil-hero">
+            <div class="profil-hero__couverture"></div>
+            <div class="profil-hero__corps">
+
+                <!-- Avatar -->
+                <div class="profil-hero__avatar-conteneur">
+                    <div class="profil-hero__avatar">
+                        <i class="fa-solid fa-user"></i>
+                    </div>
+                    <button class="profil-hero__btn-photo" type="button" title="Changer la photo de profil">
+                        <i class="fa-solid fa-camera"></i>
+                    </button>
+                </div>
+
+                <!-- Nom, discipline, bio -->
+                <div class="profil-hero__infos">
+                    <h2 class="profil-hero__nom">
+                        <% if (profilComplet) { %>
+                            <%= artiste.prenom %> <%= artiste.nom %>
+                        <% } else { %>
+                            Profil incomplet
+                        <% } %>
+                    </h2>
+                    <p class="profil-hero__discipline">
+                        <%= artiste.discipline || 'Discipline non renseignée' %>
+                    </p>
+                    <% if (artiste.bio) { %>
+                        <p class="profil-hero__bio"><%= artiste.bio %></p>
+                    <% } %>
+                </div>
+
+                <!-- Statistiques -->
+                <div class="profil-hero__stats">
+                    <div>
+                        <span class="stat__valeur"><%= artiste.stats.artworkCount %></span>
+                        <span class="stat__libelle">Oeuvres</span>
+                    </div>
+                    <div class="stat__separateur"></div>
+                    <div>
+                        <span class="stat__valeur"><%= artiste.stats.exhibitionCount %></span>
+                        <span class="stat__libelle">Expositions</span>
+                    </div>
+                    <div class="stat__separateur"></div>
+                    <div>
+                        <span class="stat__valeur"><%= artiste.stats.salesCount %></span>
+                        <span class="stat__libelle">Ventes</span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- =============================================
+             FORMULAIRE — complétion (profil incomplet)
+                       ou édition (profil complet)
+             ============================================= -->
+        <section class="section">
+            <h2 class="section__titre">
+                <% if (!profilComplet) { %>
+                    Complétez votre profil
+                <% } else { %>
+                    Modifier mon profil
+                <% } %>
+            </h2>
+
+            <div class="formulaire-carte">
+                <form
+                    method="POST"
+                    action="/artiste/profile"
+                    class="formulaire-profil"
+                    id="formulaireProfil"
+                >
+
+                    <!-- Email (lecture seule — venu de l'inscription) -->
+                    <div class="champ">
+                        <label class="champ__label" for="champEmail">Adresse email</label>
+                        <input
+                            class="champ__input champ__input--lecture-seule"
+                            type="email"
+                            id="champEmail"
+                            name="email"
+                            value="<%= artiste.email %>"
+                            readonly
+                        >
+                    </div>
+
+                    <!-- Prénom et Nom (obligatoires) -->
+                    <div class="formulaire-grille">
+                        <div class="champ">
+                            <label class="champ__label champ__label--obligatoire" for="champPrenom">Prénom</label>
+                            <input
+                                class="champ__input"
+                                type="text"
+                                id="champPrenom"
+                                name="prenom"
+                                placeholder="Votre prénom"
+                                value="<%= artiste.prenom %>"
+                                required
+                            >
+                        </div>
+                        <div class="champ">
+                            <label class="champ__label champ__label--obligatoire" for="champNom">Nom</label>
+                            <input
+                                class="champ__input"
+                                type="text"
+                                id="champNom"
+                                name="nom"
+                                placeholder="Votre nom"
+                                value="<%= artiste.nom %>"
+                                required
+                            >
+                        </div>
+                    </div>
+
+                    <!-- Discipline artistique (obligatoire) -->
+                    <div class="champ">
+                        <label class="champ__label champ__label--obligatoire" for="champDiscipline">Discipline artistique</label>
+                        <input
+                            class="champ__input"
+                            type="text"
+                            id="champDiscipline"
+                            name="discipline"
+                            placeholder="Ex : Peinture, Sculpture, Photographie..."
+                            value="<%= artiste.discipline %>"
+                            required
+                        >
+                    </div>
+
+                    <!-- Biographie (optionnelle) -->
+                    <div class="champ">
+                        <label class="champ__label" for="champBio">Biographie</label>
+                        <textarea
+                            class="champ__textarea"
+                            id="champBio"
+                            name="bio"
+                            rows="4"
+                            placeholder="Décrivez votre parcours et votre univers artistique..."
+                        ><%= artiste.bio %></textarea>
+                    </div>
+
+                    <!-- Ville et Pays (optionnels) -->
+                    <div class="formulaire-grille">
+                        <div class="champ">
+                            <label class="champ__label" for="champVille">Ville</label>
+                            <input
+                                class="champ__input"
+                                type="text"
+                                id="champVille"
+                                name="ville"
+                                placeholder="Votre ville"
+                                value="<%= artiste.ville %>"
+                            >
+                        </div>
+                        <div class="champ">
+                            <label class="champ__label" for="champPays">Pays</label>
+                            <input
+                                class="champ__input"
+                                type="text"
+                                id="champPays"
+                                name="pays"
+                                placeholder="Votre pays"
+                                value="<%= artiste.pays %>"
+                            >
+                        </div>
+                    </div>
+
+                    <!-- Site web / Portfolio (optionnel) -->
+                    <div class="champ">
+                        <label class="champ__label" for="champSiteWeb">Site web / Portfolio</label>
+                        <input
+                            class="champ__input"
+                            type="url"
+                            id="champSiteWeb"
+                            name="siteWeb"
+                            placeholder="https://votre-portfolio.com"
+                            value="<%= artiste.siteWeb %>"
+                        >
+                    </div>
+
+                    <div class="formulaire-actions">
+                        <% if (profilComplet) { %>
+                            <button type="reset" class="btn btn--secondaire">Annuler</button>
+                        <% } %>
+                        <button type="submit" class="btn btn--principal">
+                            <% if (!profilComplet) { %>
+                                Compléter mon profil
+                            <% } else { %>
+                                Enregistrer les modifications
+                            <% } %>
+                        </button>
+                    </div>
+
+                </form>
+            </div>
+        </section>
+
+        <!-- =============================================
+             ACCÈS RAPIDE — use cases du diagramme
+             Bloqué si profil incomplet
+             ============================================= -->
+        <section class="section">
+            <h2 class="section__titre">Accès rapide</h2>
+
+            <div class="acces-rapide">
+
+                <!-- Gérer mes oeuvres -->
+                <a
+                    href="<%= profilComplet ? '/artiste/my-artworks' : '#' %>"
+                    class="carte-action <%= !profilComplet ? 'carte-action--bloquee' : '' %>"
+                >
+                    <div class="carte-action__icone">
+                        <i class="fa-solid fa-palette"></i>
+                    </div>
+                    <div class="carte-action__corps">
+                        <p class="carte-action__titre">Gérer mes oeuvres</p>
+                        <p class="carte-action__description">Ajouter, modifier ou supprimer vos créations</p>
+                    </div>
+                    <i class="fa-solid fa-<%= profilComplet ? 'chevron-right' : 'lock' %> carte-action__fleche"></i>
+                </a>
+
+                <!-- Ajouter une exposition -->
+                <a
+                    href="<%= profilComplet ? '/artiste/exhibition/add' : '#' %>"
+                    class="carte-action <%= !profilComplet ? 'carte-action--bloquee' : '' %>"
+                >
+                    <div class="carte-action__icone">
+                        <i class="fa-solid fa-plus"></i>
+                    </div>
+                    <div class="carte-action__corps">
+                        <p class="carte-action__titre">Ajouter une exposition</p>
+                        <p class="carte-action__description">Créer une nouvelle exposition de vos oeuvres</p>
+                    </div>
+                    <i class="fa-solid fa-<%= profilComplet ? 'chevron-right' : 'lock' %> carte-action__fleche"></i>
+                </a>
+
+                <!-- Gérer mes expositions -->
+                <a
+                    href="<%= profilComplet ? '/artiste/exhibitions' : '#' %>"
+                    class="carte-action <%= !profilComplet ? 'carte-action--bloquee' : '' %>"
+                >
+                    <div class="carte-action__icone">
+                        <i class="fa-solid fa-building-columns"></i>
+                    </div>
+                    <div class="carte-action__corps">
+                        <p class="carte-action__titre">Gérer mes expositions</p>
+                        <p class="carte-action__description">Consulter et gérer vos expositions en cours</p>
+                    </div>
+                    <i class="fa-solid fa-<%= profilComplet ? 'chevron-right' : 'lock' %> carte-action__fleche"></i>
+                </a>
+
+                <!-- Gérer mes ventes -->
+                <a
+                    href="<%= profilComplet ? '/artiste/sales' : '#' %>"
+                    class="carte-action <%= !profilComplet ? 'carte-action--bloquee' : '' %>"
+                >
+                    <div class="carte-action__icone">
+                        <i class="fa-solid fa-chart-line"></i>
+                    </div>
+                    <div class="carte-action__corps">
+                        <p class="carte-action__titre">Gérer mes ventes</p>
+                        <p class="carte-action__description">Suivre vos transactions et revenus</p>
+                    </div>
+                    <i class="fa-solid fa-<%= profilComplet ? 'chevron-right' : 'lock' %> carte-action__fleche"></i>
+                </a>
+
+            </div>
+
+            <!-- Message explicatif si accès bloqué -->
+            <% if (!profilComplet) { %>
+            <p class="acces-rapide__message-blocage">
+                <i class="fa-solid fa-circle-info"></i>
+                Ces fonctionnalités seront débloquées après la complétion de votre profil.
+            </p>
+            <% } %>
+
+        </section>
+
+        <!-- =============================================
+             SÉCURITÉ — changement de mot de passe
+             Toujours accessible
+             ============================================= -->
+        <section class="section">
+            <h2 class="section__titre">Sécurité</h2>
+
+            <div class="formulaire-carte">
+                <form
+                    method="POST"
+                    action="/artiste/profile/mot-de-passe"
+                    class="formulaire-profil"
+                    id="formulaireMotDePasse"
+                >
+
+                    <!-- Mot de passe actuel -->
+                    <div class="champ">
+                        <label class="champ__label champ__label--obligatoire" for="champMdpActuel">Mot de passe actuel</label>
+                        <div class="champ__mot-de-passe">
+                            <input
+                                class="champ__input"
+                                type="password"
+                                id="champMdpActuel"
+                                name="mdpActuel"
+                                placeholder="••••••••"
+                                autocomplete="current-password"
+                            >
+                            <button type="button" class="btn-afficher-mdp" aria-label="Afficher le mot de passe">
+                                <i class="fa-solid fa-eye"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Nouveau mot de passe et confirmation -->
+                    <div class="formulaire-grille">
+                        <div class="champ">
+                            <label class="champ__label champ__label--obligatoire" for="champNouveauMdp">Nouveau mot de passe</label>
+                            <div class="champ__mot-de-passe">
+                                <input
+                                    class="champ__input"
+                                    type="password"
+                                    id="champNouveauMdp"
+                                    name="nouveauMdp"
+                                    placeholder="••••••••"
+                                    autocomplete="new-password"
+                                >
+                                <button type="button" class="btn-afficher-mdp" aria-label="Afficher le mot de passe">
+                                    <i class="fa-solid fa-eye"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="champ">
+                            <label class="champ__label champ__label--obligatoire" for="champConfirmationMdp">Confirmer le mot de passe</label>
+                            <div class="champ__mot-de-passe">
+                                <input
+                                    class="champ__input"
+                                    type="password"
+                                    id="champConfirmationMdp"
+                                    name="confirmationMdp"
+                                    placeholder="••••••••"
+                                    autocomplete="new-password"
+                                >
+                                <button type="button" class="btn-afficher-mdp" aria-label="Afficher le mot de passe">
+                                    <i class="fa-solid fa-eye"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="formulaire-actions">
+                        <button type="submit" class="btn btn--principal">
+                            Changer le mot de passe
+                        </button>
+                    </div>
+
+                </form>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Bouton menu mobile -->
+    <button class="btn-menu-mobile" id="btnMenuMobile" aria-label="Ouvrir le menu">
+        <i class="fa-solid fa-bars"></i>
+    </button>
+
+    <!-- =============================================
+         JAVASCRIPT
+         ============================================= -->
+    <script>
+        // ---- Boutons afficher/masquer mot de passe ----
+        document.querySelectorAll('.btn-afficher-mdp').forEach(function(bouton) {
+            bouton.addEventListener('click', function() {
+                var champInput = this.previousElementSibling;
+                var icone = this.querySelector('i');
+
+                if (champInput.type === 'password') {
+                    champInput.type = 'text';
+                    icone.classList.replace('fa-eye', 'fa-eye-slash');
+                } else {
+                    champInput.type = 'password';
+                    icone.classList.replace('fa-eye-slash', 'fa-eye');
+                }
+            });
+        });
+
+        // ---- Menu mobile : ouvrir/fermer la sidebar ----
+        var btnMenuMobile = document.getElementById('btnMenuMobile');
+        var sidebar       = document.getElementById('sidebar');
+        var sidebarVoile  = document.getElementById('sidebarVoile');
+
+        function ouvrirSidebar() {
+            sidebar.classList.add('sidebar--ouverte');
+            sidebarVoile.classList.add('sidebar-voile--visible');
+        }
+
+        function fermerSidebar() {
+            sidebar.classList.remove('sidebar--ouverte');
+            sidebarVoile.classList.remove('sidebar-voile--visible');
+        }
+
+        btnMenuMobile.addEventListener('click', function() {
+            if (sidebar.classList.contains('sidebar--ouverte')) {
+                fermerSidebar();
+            } else {
+                ouvrirSidebar();
+            }
+        });
+
+        sidebarVoile.addEventListener('click', fermerSidebar);
+    </script>
+
+</body>
+</html>

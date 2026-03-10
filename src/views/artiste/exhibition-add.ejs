@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ajouter une exposition | ArtExpo</title>
+    <link rel="stylesheet" href="/css/artiste.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body class="artiste-page">
+
+    <aside class="sidebar" id="sidebar">
+        <a href="/" class="sidebar__logo">ArtExpo</a>
+        <div class="sidebar__mini-profil">
+            <div class="sidebar__mini-avatar"><i class="fa-solid fa-user"></i></div>
+            <p class="sidebar__mini-nom"><%= artiste.prenom %> <%= artiste.nom %></p>
+            <span class="sidebar__mini-role">Artiste</span>
+        </div>
+        <nav class="sidebar__nav">
+            <a href="/artiste/dashboard" class="sidebar__lien">
+                <i class="fa-solid fa-gauge"></i><span>Tableau de bord</span>
+            </a>
+            <a href="/artiste/profile" class="sidebar__lien">
+                <i class="fa-solid fa-user-pen"></i><span>Mon Profil</span>
+            </a>
+            <a href="/artiste/my-artworks" class="sidebar__lien">
+                <i class="fa-solid fa-palette"></i><span>Mes Oeuvres</span>
+            </a>
+            <a href="/artiste/exhibitions" class="sidebar__lien sidebar__lien--actif">
+                <i class="fa-solid fa-building-columns"></i><span>Mes Expositions</span>
+            </a>
+            <a href="/artiste/sales" class="sidebar__lien">
+                <i class="fa-solid fa-chart-line"></i><span>Mes Ventes</span>
+            </a>
+        </nav>
+        <div class="sidebar__pied">
+            <a href="/auth/login" class="sidebar__deconnexion">
+                <i class="fa-solid fa-right-from-bracket"></i><span>Se déconnecter</span>
+            </a>
+        </div>
+    </aside>
+
+    <div class="sidebar-voile" id="sidebarVoile"></div>
+
+    <main class="artiste-contenu">
+
+        <!-- Fil d'ariane -->
+        <nav class="fil-ariane">
+            <a href="/artiste/exhibitions" class="fil-ariane__lien">Mes Expositions</a>
+            <i class="fa-solid fa-chevron-right fil-ariane__separateur"></i>
+            <span class="fil-ariane__courant">Ajouter une exposition</span>
+        </nav>
+
+        <div class="page-entete">
+            <h1 class="page-titre">Ajouter une exposition</h1>
+            <p class="page-sous-titre">Organisez une nouvelle exposition pour mettre en avant vos oeuvres</p>
+        </div>
+
+        <div class="formulaire-carte">
+            <form method="POST" action="/artiste/exhibition/add" class="formulaire-profil" id="formulaireExposition">
+
+                <!-- Titre -->
+                <div class="champ">
+                    <label class="champ__label champ__label--obligatoire" for="champTitre">Titre de l'exposition</label>
+                    <input class="champ__input" type="text" id="champTitre" name="titre"
+                        placeholder="Ex : Lumières d'automne" required>
+                </div>
+
+                <!-- Description -->
+                <div class="champ">
+                    <label class="champ__label" for="champDescription">Description</label>
+                    <textarea class="champ__textarea" id="champDescription" name="description"
+                        rows="4" placeholder="Présentez votre exposition, son thème, son ambiance..."></textarea>
+                </div>
+
+                <!-- Dates -->
+                <div class="formulaire-grille">
+                    <div class="champ">
+                        <label class="champ__label champ__label--obligatoire" for="champDateDebut">Date de début</label>
+                        <input class="champ__input" type="date" id="champDateDebut" name="dateDebut" required>
+                    </div>
+                    <div class="champ">
+                        <label class="champ__label champ__label--obligatoire" for="champDateFin">Date de fin</label>
+                        <input class="champ__input" type="date" id="champDateFin" name="dateFin" required>
+                    </div>
+                </div>
+
+                <!-- Lieu -->
+                <div class="champ">
+                    <label class="champ__label champ__label--obligatoire" for="champLieu">Lieu / Galerie</label>
+                    <input class="champ__input" type="text" id="champLieu" name="lieu"
+                        placeholder="Ex : Galerie du Centre, Musée d'Art Moderne..." required>
+                </div>
+
+                <!-- Ville et Pays -->
+                <div class="formulaire-grille">
+                    <div class="champ">
+                        <label class="champ__label" for="champVille">Ville</label>
+                        <input class="champ__input" type="text" id="champVille" name="ville"
+                            placeholder="Ex : Paris">
+                    </div>
+                    <div class="champ">
+                        <label class="champ__label" for="champPays">Pays</label>
+                        <input class="champ__input" type="text" id="champPays" name="pays"
+                            placeholder="Ex : France">
+                    </div>
+                </div>
+
+                <!-- Sélection des oeuvres -->
+                <div class="champ">
+                    <label class="champ__label">Oeuvres à inclure</label>
+                    <!-- TODO: générer la liste des oeuvres depuis la BDD -->
+                    <div class="oeuvres-selection-vide">
+                        <i class="fa-solid fa-palette"></i>
+                        <p>Aucune oeuvre disponible — <a href="/artiste/artwork/add">Ajouter une oeuvre</a></p>
+                    </div>
+                </div>
+
+                <div class="formulaire-actions">
+                    <a href="/artiste/exhibitions" class="btn btn--secondaire">Annuler</a>
+                    <button type="submit" class="btn btn--principal">
+                        <i class="fa-solid fa-check"></i> Créer l'exposition
+                    </button>
+                </div>
+
+            </form>
+        </div>
+
+    </main>
+
+    <button class="btn-menu-mobile" id="btnMenuMobile" aria-label="Ouvrir le menu">
+        <i class="fa-solid fa-bars"></i>
+    </button>
+
+    <script>
+        // Validation : date de fin >= date de début
+        var champDateDebut = document.getElementById('champDateDebut');
+        var champDateFin   = document.getElementById('champDateFin');
+        champDateDebut.addEventListener('change', function() {
+            champDateFin.min = this.value;
+        });
+
+        var btnMenuMobile = document.getElementById('btnMenuMobile');
+        var sidebar       = document.getElementById('sidebar');
+        var sidebarVoile  = document.getElementById('sidebarVoile');
+        btnMenuMobile.addEventListener('click', function() {
+            sidebar.classList.toggle('sidebar--ouverte');
+            sidebarVoile.classList.toggle('sidebar-voile--visible');
+        });
+        sidebarVoile.addEventListener('click', function() {
+            sidebar.classList.remove('sidebar--ouverte');
+            sidebarVoile.classList.remove('sidebar-voile--visible');
+        });
+    </script>
+
+</body>
+</html>

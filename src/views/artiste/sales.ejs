@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mes Ventes | ArtExpo</title>
+    <link rel="stylesheet" href="/css/artiste.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body class="artiste-page">
+
+    <aside class="sidebar" id="sidebar">
+        <a href="/" class="sidebar__logo">ArtExpo</a>
+        <div class="sidebar__mini-profil">
+            <div class="sidebar__mini-avatar"><i class="fa-solid fa-user"></i></div>
+            <p class="sidebar__mini-nom"><%= artiste.prenom %> <%= artiste.nom %></p>
+            <span class="sidebar__mini-role">Artiste</span>
+        </div>
+        <nav class="sidebar__nav">
+            <a href="/artiste/dashboard" class="sidebar__lien">
+                <i class="fa-solid fa-gauge"></i><span>Tableau de bord</span>
+            </a>
+            <a href="/artiste/profile" class="sidebar__lien">
+                <i class="fa-solid fa-user-pen"></i><span>Mon Profil</span>
+            </a>
+            <a href="/artiste/my-artworks" class="sidebar__lien">
+                <i class="fa-solid fa-palette"></i><span>Mes Oeuvres</span>
+            </a>
+            <a href="/artiste/exhibitions" class="sidebar__lien">
+                <i class="fa-solid fa-building-columns"></i><span>Mes Expositions</span>
+            </a>
+            <a href="/artiste/sales" class="sidebar__lien sidebar__lien--actif">
+                <i class="fa-solid fa-chart-line"></i><span>Mes Ventes</span>
+            </a>
+        </nav>
+        <div class="sidebar__pied">
+            <a href="/auth/login" class="sidebar__deconnexion">
+                <i class="fa-solid fa-right-from-bracket"></i><span>Se déconnecter</span>
+            </a>
+        </div>
+    </aside>
+
+    <div class="sidebar-voile" id="sidebarVoile"></div>
+
+    <main class="artiste-contenu">
+
+        <div class="page-entete">
+            <h1 class="page-titre">Mes Ventes</h1>
+            <p class="page-sous-titre">Suivez vos transactions et vos revenus</p>
+        </div>
+
+        <!-- Statistiques revenus -->
+        <div class="dashboard-stats">
+            <div class="dashboard-stat-carte">
+                <div class="dashboard-stat-carte__icone">
+                    <i class="fa-solid fa-euro-sign"></i>
+                </div>
+                <div class="dashboard-stat-carte__corps">
+                    <!-- TODO: calculer depuis la BDD -->
+                    <span class="dashboard-stat-carte__valeur">0 €</span>
+                    <span class="dashboard-stat-carte__libelle">Total des revenus</span>
+                </div>
+            </div>
+            <div class="dashboard-stat-carte">
+                <div class="dashboard-stat-carte__icone">
+                    <i class="fa-solid fa-bag-shopping"></i>
+                </div>
+                <div class="dashboard-stat-carte__corps">
+                    <span class="dashboard-stat-carte__valeur"><%= artiste.stats.salesCount %></span>
+                    <span class="dashboard-stat-carte__libelle">Ventes réalisées</span>
+                </div>
+            </div>
+            <div class="dashboard-stat-carte">
+                <div class="dashboard-stat-carte__icone">
+                    <i class="fa-solid fa-calculator"></i>
+                </div>
+                <div class="dashboard-stat-carte__corps">
+                    <span class="dashboard-stat-carte__valeur">0 €</span>
+                    <span class="dashboard-stat-carte__libelle">Prix moyen</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Filtres période -->
+        <section class="section">
+            <h2 class="section__titre">Historique des ventes</h2>
+
+            <div class="filtres">
+                <button class="filtre-btn filtre-btn--actif" data-filtre="tout">Tout</button>
+                <button class="filtre-btn" data-filtre="mois">Ce mois</button>
+                <button class="filtre-btn" data-filtre="trimestre">3 mois</button>
+                <button class="filtre-btn" data-filtre="annee">1 an</button>
+            </div>
+
+            <!-- Tableau des ventes -->
+            <!-- TODO: remplacer par une boucle EJS sur les ventes de la BDD -->
+            <div class="etat-vide" style="margin-top: 1.5rem;">
+                <i class="fa-solid fa-chart-line etat-vide__icone"></i>
+                <p class="etat-vide__texte">Aucune vente enregistrée</p>
+                <p class="etat-vide__sous-texte">Vos transactions apparaîtront ici une fois vos oeuvres vendues</p>
+            </div>
+
+        </section>
+
+    </main>
+
+    <button class="btn-menu-mobile" id="btnMenuMobile" aria-label="Ouvrir le menu">
+        <i class="fa-solid fa-bars"></i>
+    </button>
+
+    <script>
+        document.querySelectorAll('.filtre-btn').forEach(function(btn) {
+            btn.addEventListener('click', function() {
+                document.querySelectorAll('.filtre-btn').forEach(function(b) {
+                    b.classList.remove('filtre-btn--actif');
+                });
+                this.classList.add('filtre-btn--actif');
+            });
+        });
+        var btnMenuMobile = document.getElementById('btnMenuMobile');
+        var sidebar       = document.getElementById('sidebar');
+        var sidebarVoile  = document.getElementById('sidebarVoile');
+        btnMenuMobile.addEventListener('click', function() {
+            sidebar.classList.toggle('sidebar--ouverte');
+            sidebarVoile.classList.toggle('sidebar-voile--visible');
+        });
+        sidebarVoile.addEventListener('click', function() {
+            sidebar.classList.remove('sidebar--ouverte');
+            sidebarVoile.classList.remove('sidebar-voile--visible');
+        });
+    </script>
+
+</body>
+</html>
