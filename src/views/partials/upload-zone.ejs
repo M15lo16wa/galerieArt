@@ -1,0 +1,19 @@
+<div class="champ">
+    <label class="champ__label" for="champImage"><%= labelImage %></label>
+    <div class="zone-upload" id="zoneUpload">
+        <div class="zone-upload__apercu" id="zoneApercu" style="display:none;">
+            <img id="apercuImage" class="zone-upload__apercu-img" src="" alt="Aperçu">
+            <button type="button" class="zone-upload__supprimer" id="btnSupprimerImage" aria-label="Supprimer l'image">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+        </div>
+        <div class="zone-upload__contenu" id="zoneUploadContenu">
+            <i class="fa-solid fa-cloud-arrow-up zone-upload__icone"></i>
+            <p class="zone-upload__texte"><%= texteUpload %></p>
+            <p class="zone-upload__ou">ou</p>
+            <label for="champImage" class="btn btn--secondaire zone-upload__btn">Choisir un fichier</label>
+            <p class="zone-upload__hint">JPG, PNG ou WEBP — max 500 Mo</p>
+        </div>
+        <input type="file" id="champImage" name="image" accept="image/jpeg,image/png,image/webp" class="zone-upload__input">
+    </div>
+</div>

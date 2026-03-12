@@ -1,0 +1,143 @@
+<%- include('../partials/header', { title: 'Catalogue' }) %>
+
+<main class="catalogue">
+
+  <!-- ===== BARRE D'ONGLETS ===== -->
+  <nav class="catalogue__tabs" role="tablist" aria-label="Catégories du catalogue">
+    <button class="catalogue__tab catalogue__tab--active" data-cat="peinture"      role="tab" aria-selected="true">Peinture</button>
+    <button class="catalogue__tab"                        data-cat="sculpture"     role="tab" aria-selected="false">Sculpture</button>
+    <button class="catalogue__tab"                        data-cat="photographie"  role="tab" aria-selected="false">Photographie</button>
+    <button class="catalogue__tab"                        data-cat="dessin"        role="tab" aria-selected="false">Dessin</button>
+  </nav>
+
+  <!-- ===== PANNEAU FILTRES (partial réutilisable) ===== -->
+  <%- include('../partials/catalogue-filtres') %>
+
+  <!-- ===== GRILLE DES EXPOSITIONS ===== -->
+  <section class="catalogue__results">
+    <div class="catalogue__results-inner">
+
+      <div class="catalogue__results-header">
+        <h2 class="catalogue__results-title">Expositions</h2>
+        <span class="catalogue__results-count">9 résultats</span>
+      </div>
+
+      <div class="catalogue__grid">
+
+        <a href="/amateur/artwork/1" class="catalogue__card">
+          <img src="/images/image-catalogue-exposition-1.jpg" alt="Lumières de Paris" class="catalogue__card-img">
+          <div class="catalogue__card-body">
+            <span class="catalogue__card-title">Lumières de Paris</span>
+            <span class="catalogue__card-meta">Galerie Beaumont · Huile sur toile</span>
+            <div class="catalogue__card-footer">
+              <span class="catalogue__card-price">2 400 €</span>
+              <span class="catalogue__card-cta">Voir l'œuvre</span>
+            </div>
+          </div>
+        </a>
+
+        <a href="/amateur/artwork/2" class="catalogue__card">
+          <img src="/images/image-catalogue-exposition-2.jpg" alt="Âmes et Couleurs" class="catalogue__card-img">
+          <div class="catalogue__card-body">
+            <span class="catalogue__card-title">Âmes et Couleurs</span>
+            <span class="catalogue__card-meta">Studio Moreau · Acrylique</span>
+            <div class="catalogue__card-footer">
+              <span class="catalogue__card-price">890 €</span>
+              <span class="catalogue__card-cta">Voir l'œuvre</span>
+            </div>
+          </div>
+        </a>
+
+        <a href="/amateur/artwork/3" class="catalogue__card">
+          <img src="/images/image-catalogue-exposition-3.jpg" alt="Corps et Espace" class="catalogue__card-img">
+          <div class="catalogue__card-body">
+            <span class="catalogue__card-title">Corps et Espace</span>
+            <span class="catalogue__card-meta">Galerie du Nord · Aquarelle</span>
+            <div class="catalogue__card-footer">
+              <span class="catalogue__card-price">3 200 €</span>
+              <span class="catalogue__card-cta">Voir l'œuvre</span>
+            </div>
+          </div>
+        </a>
+
+        <a href="/amateur/artwork/4" class="catalogue__card">
+          <img src="/images/image-catalogue%20exposition.jpg" alt="Horizons" class="catalogue__card-img">
+          <div class="catalogue__card-body">
+            <span class="catalogue__card-title">Horizons</span>
+            <span class="catalogue__card-meta">Atelier Renard · Pastel</span>
+            <div class="catalogue__card-footer">
+              <span class="catalogue__card-price">1 750 €</span>
+              <span class="catalogue__card-cta">Voir l'œuvre</span>
+            </div>
+          </div>
+        </a>
+
+        <a href="/amateur/artwork/5" class="catalogue__card">
+          <img src="/images/image-catalogue-4.jpg" alt="Fragments" class="catalogue__card-img">
+          <div class="catalogue__card-body">
+            <span class="catalogue__card-title">Fragments</span>
+            <span class="catalogue__card-meta">Espace Lumière · Acrylique</span>
+            <div class="catalogue__card-footer">
+              <span class="catalogue__card-price">450 €</span>
+              <span class="catalogue__card-cta">Voir l'œuvre</span>
+            </div>
+          </div>
+        </a>
+
+        <a href="/amateur/artwork/6" class="catalogue__card">
+          <img src="/images/image-catalogue-5.jpg" alt="Urbanité" class="catalogue__card-img">
+          <div class="catalogue__card-body">
+            <span class="catalogue__card-title">Urbanité</span>
+            <span class="catalogue__card-meta">Galerie Azur · Huile sur toile</span>
+            <div class="catalogue__card-footer">
+              <span class="catalogue__card-price">2 100 €</span>
+              <span class="catalogue__card-cta">Voir l'œuvre</span>
+            </div>
+          </div>
+        </a>
+
+        <a href="/amateur/artwork/7" class="catalogue__card">
+          <img src="/images/image-catalogue-6.jpg" alt="Mémoires vives" class="catalogue__card-img">
+          <div class="catalogue__card-body">
+            <span class="catalogue__card-title">Mémoires vives</span>
+            <span class="catalogue__card-meta">Studio Klein · Encre</span>
+            <div class="catalogue__card-footer">
+              <span class="catalogue__card-price">680 €</span>
+              <span class="catalogue__card-cta">Voir l'œuvre</span>
+            </div>
+          </div>
+        </a>
+
+        <a href="/amateur/artwork/8" class="catalogue__card">
+          <img src="/images/image-catalogue-7.jpg" alt="Dialogues" class="catalogue__card-img">
+          <div class="catalogue__card-body">
+            <span class="catalogue__card-title">Dialogues</span>
+            <span class="catalogue__card-meta">Espace Art 21 · Mixed media</span>
+            <div class="catalogue__card-footer">
+              <span class="catalogue__card-price">5 800 €</span>
+              <span class="catalogue__card-cta">Voir l'œuvre</span>
+            </div>
+          </div>
+        </a>
+
+        <a href="/amateur/artwork/9" class="catalogue__card">
+          <img src="/images/image-catalogue-8.jpg" alt="Formes libres" class="catalogue__card-img">
+          <div class="catalogue__card-body">
+            <span class="catalogue__card-title">Formes libres</span>
+            <span class="catalogue__card-meta">Galerie Centrale · Aquarelle</span>
+            <div class="catalogue__card-footer">
+              <span class="catalogue__card-price">1 200 €</span>
+              <span class="catalogue__card-cta">Voir l'œuvre</span>
+            </div>
+          </div>
+        </a>
+
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<%- include('../partials/footer') %>
+
+<script src="/js/catalogue.js" defer></script>

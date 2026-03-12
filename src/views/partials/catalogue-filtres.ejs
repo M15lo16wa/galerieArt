@@ -1,0 +1,261 @@
+<%
+/*
+  Partial : catalogue-filtres.ejs
+  Variables attendues depuis le parent :
+    - filterMode  : 'full' (défaut, page catalogue) | 'compact' (page expositions)
+    - query       : req.query (utilisé en mode compact pour afficher les filtres actifs)
+*/
+  const _mode     = typeof filterMode !== 'undefined' ? filterMode : 'full';
+  const _cat      = (typeof query !== 'undefined' && query.cat)       ? query.cat       : 'peinture';
+  const _style    = (typeof query !== 'undefined' && query.style)     ? query.style     : null;
+  const _tech     = (typeof query !== 'undefined' && query.technique) ? query.technique : null;
+  const _sujet    = (typeof query !== 'undefined' && query.sujet)     ? query.sujet     : null;
+  const _prix     = (typeof query !== 'undefined' && query.prix)      ? query.prix      : null;
+
+  function labelCat(slug) {
+    const map = { peinture:'Peinture', sculpture:'Sculpture', photographie:'Photographie', dessin:'Dessin' };
+    return map[slug] || slug;
+  }
+  function capitalize(s) { return s ? s.charAt(0).toUpperCase() + s.slice(1).replace(/-/g,' ') : ''; }
+%>
+
+<!-- ================================================================
+     MODE COMPACT  —  barre de filtres actifs (page expositions)
+     ================================================================ -->
+<% if (_mode === 'compact') { %>
+
+<div class="cat-filtres cat-filtres--compact">
+  <div class="cat-compact__inner">
+
+    <!-- Fil d'Ariane / filtres actifs -->
+    <div class="cat-compact__pills">
+      <a href="/amateur/catalog" class="cat-pill cat-pill--back">Catalogue</a>
+      <span class="cat-compact__sep">›</span>
+      <a href="/expositions?cat=<%= _cat %>" class="cat-pill cat-pill--cat"><%= labelCat(_cat) %></a>
+
+      <% if (_style) { %>
+        <span class="cat-compact__sep">›</span>
+        <span class="cat-pill cat-pill--filter">
+          <%= capitalize(_style) %>
+          <a href="/expositions?cat=<%= _cat %>" class="cat-pill__remove" title="Retirer ce filtre">&times;</a>
+        </span>
+      <% } %>
+      <% if (_tech) { %>
+        <span class="cat-compact__sep">›</span>
+        <span class="cat-pill cat-pill--filter">
+          <%= capitalize(_tech) %>
+          <a href="/expositions?cat=<%= _cat %>" class="cat-pill__remove" title="Retirer ce filtre">&times;</a>
+        </span>
+      <% } %>
+      <% if (_sujet) { %>
+        <span class="cat-compact__sep">›</span>
+        <span class="cat-pill cat-pill--filter">
+          <%= capitalize(_sujet) %>
+          <a href="/expositions?cat=<%= _cat %>" class="cat-pill__remove" title="Retirer ce filtre">&times;</a>
+        </span>
+      <% } %>
+      <% if (_prix) { %>
+        <span class="cat-compact__sep">›</span>
+        <span class="cat-pill cat-pill--filter">
+          <%= capitalize(_prix) %>
+          <a href="/expositions?cat=<%= _cat %>" class="cat-pill__remove" title="Retirer ce filtre">&times;</a>
+        </span>
+      <% } %>
+    </div>
+
+    <!-- Lien modifier les filtres -->
+    <a href="/amateur/catalog?cat=<%= _cat %>" class="cat-compact__modify">Modifier les filtres</a>
+
+  </div>
+</div>
+
+<!-- ================================================================
+     MODE FULL  —  panneau 4 colonnes (page catalogue)
+     ================================================================ -->
+<% } else { %>
+
+<div class="cat-filtres" id="cat-filtres">
+
+  <!-- ===== PEINTURE ===== -->
+  <div class="cat-data cat-data--active" data-cat="peinture">
+    <div class="cat-data__inner">
+      <div class="cat-col">
+        <h4 class="cat-col__heading">Style</h4>
+        <ul class="cat-col__list">
+          <li><a href="/expositions?cat=peinture&style=abstrait">Abstrait</a></li>
+          <li><a href="/expositions?cat=peinture&style=art-brut">Art brut</a></li>
+          <li><a href="/expositions?cat=peinture&style=expressionnisme">Expressionnisme</a></li>
+          <li><a href="/expositions?cat=peinture&style=impressionnisme">Impressionnisme</a></li>
+          <li><a href="/expositions?cat=peinture&style=pop-art">Pop Art</a></li>
+          <li><a href="/expositions?cat=peinture&style=street-art">Street Art</a></li>
+        </ul>
+      </div>
+      <div class="cat-col">
+        <h4 class="cat-col__heading">Technique</h4>
+        <ul class="cat-col__list">
+          <li><a href="/expositions?cat=peinture&technique=acrylique">Acrylique</a></li>
+          <li><a href="/expositions?cat=peinture&technique=aquarelle">Aquarelle</a></li>
+          <li><a href="/expositions?cat=peinture&technique=huile">Huile</a></li>
+          <li><a href="/expositions?cat=peinture&technique=pastel">Pastel</a></li>
+        </ul>
+      </div>
+      <div class="cat-col">
+        <h4 class="cat-col__heading">Sujet</h4>
+        <ul class="cat-col__list">
+          <li><a href="/expositions?cat=peinture&sujet=animal">Animal</a></li>
+          <li><a href="/expositions?cat=peinture&sujet=fleur">Fleur</a></li>
+          <li><a href="/expositions?cat=peinture&sujet=marine">Marine</a></li>
+          <li><a href="/expositions?cat=peinture&sujet=nature">Nature</a></li>
+          <li><a href="/expositions?cat=peinture&sujet=nu">Nu</a></li>
+          <li><a href="/expositions?cat=peinture&sujet=paysage">Paysage</a></li>
+          <li><a href="/expositions?cat=peinture&sujet=portrait">Portrait</a></li>
+        </ul>
+      </div>
+      <div class="cat-col">
+        <h4 class="cat-col__heading">Prix (€)</h4>
+        <ul class="cat-col__list">
+          <li><a href="/expositions?cat=peinture&prix=moins-500">Moins de 500</a></li>
+          <li><a href="/expositions?cat=peinture&prix=500-1000">500 – 1 000</a></li>
+          <li><a href="/expositions?cat=peinture&prix=1000-5000">1 000 – 5 000</a></li>
+          <li><a href="/expositions?cat=peinture&prix=5000-20000">5 000 – 20 000</a></li>
+          <li><a href="/expositions?cat=peinture&prix=plus-20000">Plus de 20 000</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== SCULPTURE ===== -->
+  <div class="cat-data" data-cat="sculpture">
+    <div class="cat-data__inner">
+      <div class="cat-col">
+        <h4 class="cat-col__heading">Style</h4>
+        <ul class="cat-col__list">
+          <li><a href="/expositions?cat=sculpture&style=abstrait">Abstrait</a></li>
+          <li><a href="/expositions?cat=sculpture&style=classique">Classique</a></li>
+          <li><a href="/expositions?cat=sculpture&style=contemporain">Contemporain</a></li>
+          <li><a href="/expositions?cat=sculpture&style=figuratif">Figuratif</a></li>
+        </ul>
+      </div>
+      <div class="cat-col">
+        <h4 class="cat-col__heading">Technique</h4>
+        <ul class="cat-col__list">
+          <li><a href="/expositions?cat=sculpture&technique=bois">Bois</a></li>
+          <li><a href="/expositions?cat=sculpture&technique=bronze">Bronze</a></li>
+          <li><a href="/expositions?cat=sculpture&technique=ceramique">Céramique</a></li>
+          <li><a href="/expositions?cat=sculpture&technique=marbre">Marbre</a></li>
+          <li><a href="/expositions?cat=sculpture&technique=resine">Résine</a></li>
+        </ul>
+      </div>
+      <div class="cat-col">
+        <h4 class="cat-col__heading">Sujet</h4>
+        <ul class="cat-col__list">
+          <li><a href="/expositions?cat=sculpture&sujet=animal">Animal</a></li>
+          <li><a href="/expositions?cat=sculpture&sujet=corps-humain">Corps humain</a></li>
+          <li><a href="/expositions?cat=sculpture&sujet=nature-morte">Nature morte</a></li>
+          <li><a href="/expositions?cat=sculpture&sujet=portrait">Portrait</a></li>
+        </ul>
+      </div>
+      <div class="cat-col">
+        <h4 class="cat-col__heading">Prix (€)</h4>
+        <ul class="cat-col__list">
+          <li><a href="/expositions?cat=sculpture&prix=moins-500">Moins de 500</a></li>
+          <li><a href="/expositions?cat=sculpture&prix=500-1000">500 – 1 000</a></li>
+          <li><a href="/expositions?cat=sculpture&prix=1000-5000">1 000 – 5 000</a></li>
+          <li><a href="/expositions?cat=sculpture&prix=5000-20000">5 000 – 20 000</a></li>
+          <li><a href="/expositions?cat=sculpture&prix=plus-20000">Plus de 20 000</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== PHOTOGRAPHIE ===== -->
+  <div class="cat-data" data-cat="photographie">
+    <div class="cat-data__inner">
+      <div class="cat-col">
+        <h4 class="cat-col__heading">Style</h4>
+        <ul class="cat-col__list">
+          <li><a href="/expositions?cat=photographie&style=contemporain">Contemporain</a></li>
+          <li><a href="/expositions?cat=photographie&style=documentaire">Documentaire</a></li>
+          <li><a href="/expositions?cat=photographie&style=experimental">Expérimental</a></li>
+          <li><a href="/expositions?cat=photographie&style=urbain">Urbain</a></li>
+        </ul>
+      </div>
+      <div class="cat-col">
+        <h4 class="cat-col__heading">Technique</h4>
+        <ul class="cat-col__list">
+          <li><a href="/expositions?cat=photographie&technique=argentique">Argentique</a></li>
+          <li><a href="/expositions?cat=photographie&technique=cyanotype">Cyanotype</a></li>
+          <li><a href="/expositions?cat=photographie&technique=numerique">Numérique</a></li>
+          <li><a href="/expositions?cat=photographie&technique=tirage-pigmentaire">Tirage pigmentaire</a></li>
+        </ul>
+      </div>
+      <div class="cat-col">
+        <h4 class="cat-col__heading">Sujet</h4>
+        <ul class="cat-col__list">
+          <li><a href="/expositions?cat=photographie&sujet=architecture">Architecture</a></li>
+          <li><a href="/expositions?cat=photographie&sujet=nature">Nature</a></li>
+          <li><a href="/expositions?cat=photographie&sujet=paysage">Paysage</a></li>
+          <li><a href="/expositions?cat=photographie&sujet=portrait">Portrait</a></li>
+          <li><a href="/expositions?cat=photographie&sujet=rue">Rue</a></li>
+        </ul>
+      </div>
+      <div class="cat-col">
+        <h4 class="cat-col__heading">Prix (€)</h4>
+        <ul class="cat-col__list">
+          <li><a href="/expositions?cat=photographie&prix=moins-500">Moins de 500</a></li>
+          <li><a href="/expositions?cat=photographie&prix=500-1000">500 – 1 000</a></li>
+          <li><a href="/expositions?cat=photographie&prix=1000-5000">1 000 – 5 000</a></li>
+          <li><a href="/expositions?cat=photographie&prix=5000-20000">5 000 – 20 000</a></li>
+          <li><a href="/expositions?cat=photographie&prix=plus-20000">Plus de 20 000</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== DESSIN ===== -->
+  <div class="cat-data" data-cat="dessin">
+    <div class="cat-data__inner">
+      <div class="cat-col">
+        <h4 class="cat-col__heading">Style</h4>
+        <ul class="cat-col__list">
+          <li><a href="/expositions?cat=dessin&style=abstrait">Abstrait</a></li>
+          <li><a href="/expositions?cat=dessin&style=figuratif">Figuratif</a></li>
+          <li><a href="/expositions?cat=dessin&style=hyperrealisme">Hyperréalisme</a></li>
+          <li><a href="/expositions?cat=dessin&style=illustration">Illustration</a></li>
+        </ul>
+      </div>
+      <div class="cat-col">
+        <h4 class="cat-col__heading">Technique</h4>
+        <ul class="cat-col__list">
+          <li><a href="/expositions?cat=dessin&technique=crayon">Crayon</a></li>
+          <li><a href="/expositions?cat=dessin&technique=encre">Encre</a></li>
+          <li><a href="/expositions?cat=dessin&technique=fusain">Fusain</a></li>
+          <li><a href="/expositions?cat=dessin&technique=pastel-sec">Pastel sec</a></li>
+        </ul>
+      </div>
+      <div class="cat-col">
+        <h4 class="cat-col__heading">Sujet</h4>
+        <ul class="cat-col__list">
+          <li><a href="/expositions?cat=dessin&sujet=animal">Animal</a></li>
+          <li><a href="/expositions?cat=dessin&sujet=corps-humain">Corps humain</a></li>
+          <li><a href="/expositions?cat=dessin&sujet=nature">Nature</a></li>
+          <li><a href="/expositions?cat=dessin&sujet=portrait">Portrait</a></li>
+        </ul>
+      </div>
+      <div class="cat-col">
+        <h4 class="cat-col__heading">Prix (€)</h4>
+        <ul class="cat-col__list">
+          <li><a href="/expositions?cat=dessin&prix=moins-500">Moins de 500</a></li>
+          <li><a href="/expositions?cat=dessin&prix=500-1000">500 – 1 000</a></li>
+          <li><a href="/expositions?cat=dessin&prix=1000-5000">1 000 – 5 000</a></li>
+          <li><a href="/expositions?cat=dessin&prix=5000-20000">5 000 – 20 000</a></li>
+          <li><a href="/expositions?cat=dessin&prix=plus-20000">Plus de 20 000</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+
+</div>
+
+<% } %>

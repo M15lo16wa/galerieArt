@@ -1,0 +1,666 @@
+/* =========================================
+   CATALOGUE
+   ========================================= */
+
+/* ----- Barre d'onglets ----- */
+
+.catalogue__tabs {
+  display: flex;
+  align-items: stretch;
+  gap: 0;
+  background: #ffffff;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  overflow-x: auto;
+  scrollbar-width: none;
+  padding: 0 2rem;
+}
+
+.catalogue__tabs::-webkit-scrollbar {
+  display: none;
+}
+
+.catalogue__tab {
+  padding: 1rem 1.4rem;
+  background: none;
+  border: none;
+  border-bottom: 2px solid transparent;
+  color: #666;
+  font-size: 0.875rem;
+  font-family: inherit;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: color 0.2s ease, border-color 0.2s ease;
+  flex-shrink: 0;
+}
+
+.catalogue__tab:hover {
+  color: #111;
+}
+
+.catalogue__tab--active {
+  color: #111;
+  border-bottom-color: #111;
+  font-weight: 600;
+}
+
+/* ----- Panneau filtres ----- */
+
+.cat-filtres {
+  background: #f7f7f7;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+/* Chaque dataset est caché par défaut */
+.cat-data {
+  display: none;
+}
+
+.cat-data--active {
+  display: block;
+}
+
+.cat-data__inner {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1.75rem 2rem;
+}
+
+/* Séparateur vertical entre colonnes */
+.cat-col {
+  padding: 0 2rem 0 0;
+  border-right: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.cat-col:first-child {
+  padding-left: 0;
+}
+
+.cat-col:last-child {
+  border-right: none;
+  padding-right: 0;
+  padding-left: 2rem;
+}
+
+.cat-col:not(:first-child):not(:last-child) {
+  padding-left: 2rem;
+}
+
+.cat-col__heading {
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #888;
+  margin-bottom: 1rem;
+}
+
+.cat-col__list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+}
+
+.cat-col__list a {
+  color: #333;
+  text-decoration: none;
+  font-size: 0.875rem;
+  transition: color 0.15s ease;
+}
+
+.cat-col__list a:hover {
+  color: #000;
+}
+
+/* ----- Résultats / grille ----- */
+
+.catalogue__results {
+  padding: 2.5rem 0 4rem;
+  background: #fff;
+}
+
+.catalogue__results-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+.catalogue__results-header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: 1.75rem;
+}
+
+.catalogue__results-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #111;
+}
+
+.catalogue__results-count {
+  font-size: 0.8rem;
+  color: #888;
+}
+
+.catalogue__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 1.5rem;
+}
+
+/* ----- Carte oeuvre ----- */
+
+.catalogue__card {
+  display: block;
+  text-decoration: none;
+  background: #ffffff;
+  border-radius: 6px;
+  overflow: hidden;
+  border: 1px solid rgba(0, 0, 0, 0.09);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.catalogue__card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.12);
+}
+
+.catalogue__card-img {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  display: block;
+}
+
+.catalogue__card-body {
+  padding: 1rem 1.1rem 1.1rem;
+}
+
+.catalogue__card-title {
+  display: block;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #111;
+  margin-bottom: 0.3rem;
+}
+
+.catalogue__card-meta {
+  display: block;
+  font-size: 0.78rem;
+  color: #666;
+  margin-bottom: 0.9rem;
+}
+
+.catalogue__card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.catalogue__card-price {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #111;
+}
+
+.catalogue__card-cta {
+  font-size: 0.75rem;
+  color: #555;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  padding: 0.3rem 0.8rem;
+  border-radius: 3px;
+  transition: color 0.15s ease, border-color 0.15s ease;
+}
+
+.catalogue__card:hover .catalogue__card-cta {
+  color: #000;
+  border-color: rgba(0, 0, 0, 0.5);
+}
+
+/* =========================================
+   PAGE EXPOSITIONS
+   ========================================= */
+
+/* ----- Barre filtres compacte ----- */
+
+.cat-filtres--compact {
+  background: #f2f2f2;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.09);
+  padding: 0.75rem 2rem;
+}
+
+.cat-compact__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 1200px;
+  margin: 0 auto;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.cat-compact__pills {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.cat-compact__sep {
+  color: #aaa;
+  font-size: 0.85rem;
+}
+
+/* Pills */
+.cat-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.3rem 0.8rem;
+  border-radius: 3px;
+  font-size: 0.8rem;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.cat-pill--back {
+  color: #555;
+  transition: color 0.15s;
+}
+.cat-pill--back:hover { color: #000; }
+
+.cat-pill--cat {
+  background: rgba(0, 0, 0, 0.07);
+  color: #111;
+  font-weight: 600;
+}
+
+.cat-pill--filter {
+  background: rgba(0, 0, 0, 0.04);
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  color: #333;
+}
+
+.cat-pill__remove {
+  color: #888;
+  text-decoration: none;
+  font-size: 0.9rem;
+  line-height: 1;
+  transition: color 0.15s;
+}
+.cat-pill__remove:hover { color: #000; }
+
+.cat-compact__modify {
+  font-size: 0.8rem;
+  color: #555;
+  text-decoration: none;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  padding: 0.3rem 0.9rem;
+  border-radius: 3px;
+  white-space: nowrap;
+  transition: color 0.15s, border-color 0.15s;
+  flex-shrink: 0;
+}
+.cat-compact__modify:hover {
+  color: #000;
+  border-color: rgba(0, 0, 0, 0.5);
+}
+
+/* ----- Layout expositions ----- */
+
+.expositions {
+  padding: 2.5rem 0 4rem;
+  background: #fff;
+}
+
+.expositions__inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+.expositions__header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: 2rem;
+}
+
+.expositions__title {
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: #111;
+  text-transform: capitalize;
+}
+
+.expositions__title-filter {
+  color: #777;
+  font-weight: 400;
+  font-style: italic;
+  text-transform: capitalize;
+}
+
+.expositions__count {
+  font-size: 0.8rem;
+  color: #888;
+}
+
+/* ----- Grille expositions ----- */
+
+.expositions__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 1.75rem;
+}
+
+/* ----- Carte expo ----- */
+
+.expo-card {
+  display: block;
+  text-decoration: none;
+  background: #ffffff;
+  border-radius: 6px;
+  overflow: hidden;
+  border: 1px solid rgba(0, 0, 0, 0.09);
+  transition: transform 0.22s ease, box-shadow 0.22s ease;
+}
+
+.expo-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.12);
+}
+
+.expo-card__img-wrap {
+  position: relative;
+  overflow: hidden;
+}
+
+.expo-card__img {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.4s ease;
+}
+
+.expo-card:hover .expo-card__img {
+  transform: scale(1.04);
+}
+
+.expo-card__overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.25s ease;
+}
+
+.expo-card:hover .expo-card__overlay {
+  opacity: 1;
+}
+
+.expo-card__overlay-cta {
+  color: #fff;
+  font-size: 0.85rem;
+  font-weight: 500;
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  padding: 0.5rem 1.2rem;
+  border-radius: 3px;
+  letter-spacing: 0.04em;
+}
+
+.expo-card__body {
+  padding: 1rem 1.1rem 1.1rem;
+}
+
+.expo-card__title {
+  display: block;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #111;
+  margin-bottom: 0.25rem;
+}
+
+.expo-card__artist {
+  display: block;
+  font-size: 0.8rem;
+  color: #666;
+  margin-bottom: 0.8rem;
+}
+
+.expo-card__meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.expo-card__technique {
+  font-size: 0.75rem;
+  color: #888;
+  font-style: italic;
+}
+
+.expo-card__price {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #111;
+}
+
+/* ----- Responsive ----- */
+
+@media (max-width: 900px) {
+  .cat-data__inner {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+    padding: 1.5rem;
+  }
+
+  .cat-col {
+    border-right: none;
+    padding: 0;
+  }
+
+  .cat-col:last-child {
+    padding-left: 0;
+  }
+
+  .cat-col:not(:first-child):not(:last-child) {
+    padding-left: 0;
+  }
+}
+
+@media (max-width: 580px) {
+  .catalogue__tabs {
+    padding: 0 1rem;
+  }
+
+  .cat-data__inner {
+    grid-template-columns: 1fr;
+  }
+
+  .catalogue__grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+  }
+}
+
+@media (max-width: 400px) {
+  .catalogue__grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* =========================================
+   PAGE ARTWORK — DÉTAIL D'UNE ŒUVRE
+   ========================================= */
+
+.artwork {
+  padding: 2rem 0 5rem;
+  background: #fff;
+}
+
+.artwork__inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+/* Fil d'Ariane */
+.artwork__breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.8rem;
+  color: #aaa;
+  margin-bottom: 2rem;
+}
+
+.artwork__breadcrumb a {
+  color: #666;
+  text-decoration: none;
+  transition: color 0.15s;
+}
+
+.artwork__breadcrumb a:hover { color: #000; }
+.artwork__breadcrumb span:last-child { color: #333; }
+
+/* Layout 2 colonnes */
+.artwork__layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: start;
+}
+
+/* Visuel */
+.artwork__img {
+  width: 100%;
+  border-radius: 6px;
+  display: block;
+  object-fit: cover;
+}
+
+/* Texte */
+.artwork__title {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #111;
+  margin-bottom: 0.4rem;
+  line-height: 1.2;
+}
+
+.artwork__artist {
+  font-size: 1rem;
+  color: #555;
+  margin-bottom: 2rem;
+}
+
+/* Métadonnées */
+.artwork__meta {
+  list-style: none;
+  border-top: 1px solid rgba(0, 0, 0, 0.08);
+  margin-bottom: 2rem;
+}
+
+.artwork__meta li {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.7rem 0;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+  font-size: 0.875rem;
+}
+
+.artwork__meta-label { color: #888; }
+.artwork__meta-value { color: #222; }
+
+/* Prix */
+.artwork__price-row {
+  display: flex;
+  align-items: baseline;
+  gap: 1rem;
+  margin-bottom: 1.75rem;
+}
+
+.artwork__price {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #111;
+}
+
+.artwork__price-note {
+  font-size: 0.78rem;
+  color: #888;
+}
+
+/* Boutons d'action */
+.artwork__actions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-bottom: 1.25rem;
+}
+
+.artwork__btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  padding: 0.85rem 1.5rem;
+  border-radius: 4px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  text-decoration: none;
+  transition: background 0.2s, color 0.2s, border-color 0.2s;
+}
+
+.artwork__btn--primary {
+  background: #111111;
+  color: #ffffff;
+  border: 1px solid #111111;
+}
+
+.artwork__btn--primary:hover {
+  background: #333333;
+  border-color: #333333;
+}
+
+.artwork__btn--outline {
+  background: transparent;
+  color: #111;
+  border: 1px solid rgba(0, 0, 0, 0.3);
+}
+
+.artwork__btn--outline:hover {
+  border-color: #000;
+  background: rgba(0, 0, 0, 0.04);
+}
+
+/* Note de connexion */
+.artwork__login-hint {
+  font-size: 0.78rem;
+  color: #888;
+  text-align: center;
+}
+
+.artwork__login-hint a {
+  color: #555;
+  text-decoration: underline;
+  transition: color 0.15s;
+}
+
+.artwork__login-hint a:hover { color: #000; }
+
+/* Responsive */
+@media (max-width: 768px) {
+  .artwork__layout {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+}

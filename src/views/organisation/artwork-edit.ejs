@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modifier l'oeuvre | ArtExpo</title>
+    <link rel="stylesheet" href="/css/organisation.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body class="organisation-page">
+
+    <%- include('../partials/sidebar-organisation', { organisation, activePage: 'artworks' }) %>
+
+    <main class="organisation-contenu">
+
+        <nav class="fil-ariane">
+            <a href="/organisation/artworks" class="fil-ariane__lien">Oeuvres</a>
+            <i class="fa-solid fa-chevron-right fil-ariane__separateur"></i>
+            <!-- TODO: oeuvre.titre quand la BDD sera connectée -->
+            <span class="fil-ariane__courant">Modifier l'oeuvre</span>
+        </nav>
+
+        <div class="page-entete">
+            <h1 class="page-titre">Modifier l'oeuvre</h1>
+            <p class="page-sous-titre">Mettez à jour les informations de cette oeuvre</p>
+        </div>
+
+        <!-- TODO: pré-remplir les champs avec l'objet oeuvre depuis la BDD -->
+        <div class="formulaire-carte">
+            <form method="POST" action="/organisation/artwork/edit" class="formulaire-profil">
+
+                <!-- Titre -->
+                <div class="champ">
+                    <label class="champ__label champ__label--obligatoire" for="champTitre">Titre de l'oeuvre</label>
+                    <input class="champ__input" type="text" id="champTitre" name="titre"
+                        placeholder="Ex : Harmonie bleue n°3"
+                        value="<%= oeuvre ? oeuvre.titre : '' %>" required>
+                </div>
+
+                <!-- Discipline et Année -->
+                <div class="formulaire-grille">
+                    <div class="champ">
+                        <label class="champ__label champ__label--obligatoire" for="champDiscipline">Discipline</label>
+                        <select class="champ__input" id="champDiscipline" name="discipline" required>
+                            <option value="" disabled <%= !oeuvre ? 'selected' : '' %>>Choisir une discipline</option>
+                            <option value="peinture"     <%= oeuvre && oeuvre.discipline === 'peinture'     ? 'selected' : '' %>>Peinture</option>
+                            <option value="sculpture"    <%= oeuvre && oeuvre.discipline === 'sculpture'    ? 'selected' : '' %>>Sculpture</option>
+                            <option value="photographie" <%= oeuvre && oeuvre.discipline === 'photographie' ? 'selected' : '' %>>Photographie</option>
+                            <option value="dessin"       <%= oeuvre && oeuvre.discipline === 'dessin'       ? 'selected' : '' %>>Dessin</option>
+                            <option value="gravure"      <%= oeuvre && oeuvre.discipline === 'gravure'      ? 'selected' : '' %>>Gravure</option>
+                            <option value="numerique"    <%= oeuvre && oeuvre.discipline === 'numerique'    ? 'selected' : '' %>>Art numérique</option>
+                            <option value="installation" <%= oeuvre && oeuvre.discipline === 'installation' ? 'selected' : '' %>>Installation</option>
+                            <option value="autre"        <%= oeuvre && oeuvre.discipline === 'autre'        ? 'selected' : '' %>>Autre</option>
+                        </select>
+                    </div>
+                    <div class="champ">
+                        <label class="champ__label" for="champAnnee">Année de création</label>
+                        <input class="champ__input" type="number" id="champAnnee" name="annee"
+                            placeholder="Ex : 2024" min="1900" max="2099"
+                            value="<%= oeuvre ? oeuvre.annee : '' %>">
+                    </div>
+                </div>
+
+                <!-- Description -->
+                <div class="champ">
+                    <label class="champ__label" for="champDescription">Description</label>
+                    <textarea class="champ__textarea" id="champDescription" name="description"
+                        rows="4" placeholder="Décrivez l'oeuvre, son contexte, sa technique..."><%= oeuvre ? oeuvre.description : '' %></textarea>
+                </div>
+
+                <!-- Prix et Disponibilité -->
+                <div class="formulaire-grille">
+                    <div class="champ">
+                        <label class="champ__label champ__label--obligatoire" for="champPrix">Prix (€)</label>
+                        <input class="champ__input" type="number" id="champPrix" name="prix"
+                            placeholder="Ex : 850" min="0" step="0.01"
+                            value="<%= oeuvre ? oeuvre.prix : '' %>" required>
+                    </div>
+                    <div class="champ">
+                        <label class="champ__label champ__label--obligatoire" for="champDisponibilite">Disponibilité</label>
+                        <select class="champ__input" id="champDisponibilite" name="disponibilite" required>
+                            <option value="disponible" <%= oeuvre && oeuvre.disponibilite === 'disponible' ? 'selected' : '' %>>Disponible à la vente</option>
+                            <option value="exposition" <%= oeuvre && oeuvre.disponibilite === 'exposition' ? 'selected' : '' %>>En exposition</option>
+                            <option value="vendu"      <%= oeuvre && oeuvre.disponibilite === 'vendu'      ? 'selected' : '' %>>Vendu</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Dimensions -->
+                <div class="formulaire-grille formulaire-grille--3">
+                    <div class="champ">
+                        <label class="champ__label" for="champLargeur">Largeur (cm)</label>
+                        <input class="champ__input" type="number" id="champLargeur" name="largeur"
+                            placeholder="Ex : 60" min="0" value="<%= oeuvre ? oeuvre.largeur : '' %>">
+                    </div>
+                    <div class="champ">
+                        <label class="champ__label" for="champHauteur">Hauteur (cm)</label>
+                        <input class="champ__input" type="number" id="champHauteur" name="hauteur"
+                            placeholder="Ex : 80" min="0" value="<%= oeuvre ? oeuvre.hauteur : '' %>">
+                    </div>
+                    <div class="champ">
+                        <label class="champ__label" for="champProfondeur">Profondeur (cm)</label>
+                        <input class="champ__input" type="number" id="champProfondeur" name="profondeur"
+                            placeholder="Ex : 5" min="0" value="<%= oeuvre ? oeuvre.profondeur : '' %>">
+                    </div>
+                </div>
+
+                <!-- Upload image -->
+                <%- include('../partials/upload-zone', { labelImage: 'Remplacer l\'image', texteUpload: 'Glissez une nouvelle image ici' }) %>
+
+                <!-- Extend : Visibilité -->
+                <div class="formulaire-section">
+                    <p class="formulaire-section__titre"><i class="fa-solid fa-eye"></i> Visibilité de l'oeuvre</p>
+                    <div class="champ">
+                        <label class="champ__label champ__label--obligatoire">Accès au public</label>
+                        <div class="radio-groupe">
+                            <label class="radio-option">
+                                <input type="radio" name="visibilite" value="publique"
+                                    <%= !oeuvre || oeuvre.visibilite === 'publique' ? 'checked' : '' %>>
+                                <span><i class="fa-solid fa-globe"></i> Publique</span>
+                            </label>
+                            <label class="radio-option">
+                                <input type="radio" name="visibilite" value="privee"
+                                    <%= oeuvre && oeuvre.visibilite === 'privee' ? 'checked' : '' %>>
+                                <span><i class="fa-solid fa-lock"></i> Privée</span>
+                            </label>
+                            <label class="radio-option">
+                                <input type="radio" name="visibilite" value="reservee"
+                                    <%= oeuvre && oeuvre.visibilite === 'reservee' ? 'checked' : '' %>>
+                                <span><i class="fa-solid fa-bookmark"></i> Réservée</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Extend : Associer à un événement -->
+                <div class="formulaire-section">
+                    <p class="formulaire-section__titre"><i class="fa-solid fa-calendar-days"></i> Associer à un événement</p>
+                    <div class="champ">
+                        <label class="champ__label" for="champExposition">Exposition / vente spéciale</label>
+                        <% if (exhibitions.length === 0) { %>
+                            <select class="champ__input" id="champExposition" name="expositionId" disabled>
+                                <option value="">Aucune exposition disponible</option>
+                            </select>
+                            <small style="font-size:0.78rem;color:#aaaaaa;margin-top:0.25rem;">
+                                <a href="/organisation/exhibition/add" style="color:#555555;">Créer une exposition</a> pour pouvoir associer des oeuvres.
+                            </small>
+                        <% } else { %>
+                            <select class="champ__input" id="champExposition" name="expositionId">
+                                <option value="">— Aucune association —</option>
+                                <% exhibitions.forEach(function(expo) { %>
+                                    <option value="<%= expo.id %>"
+                                        <%= oeuvre && oeuvre.expositionId === expo.id ? 'selected' : '' %>>
+                                        <%= expo.titre %>
+                                    </option>
+                                <% }); %>
+                            </select>
+                        <% } %>
+                    </div>
+                </div>
+
+                <!-- Extend : Lier à un artiste -->
+                <div class="formulaire-section">
+                    <p class="formulaire-section__titre"><i class="fa-solid fa-user-pen"></i> Lier à un artiste</p>
+                    <div class="champ">
+                        <label class="champ__label" for="champArtiste">Artiste de l'oeuvre</label>
+                        <% if (artistes.length === 0) { %>
+                            <select class="champ__input" id="champArtiste" name="artisteId" disabled>
+                                <option value="">Aucun artiste enregistré</option>
+                            </select>
+                            <small style="font-size:0.78rem;color:#aaaaaa;margin-top:0.25rem;">
+                                <a href="/organisation/artists" style="color:#555555;">Ajouter un artiste</a> pour pouvoir lier des oeuvres.
+                            </small>
+                        <% } else { %>
+                            <select class="champ__input" id="champArtiste" name="artisteId">
+                                <option value="">— Non attribué —</option>
+                                <% artistes.forEach(function(artiste) { %>
+                                    <option value="<%= artiste.id %>"
+                                        <%= oeuvre && oeuvre.artisteId === artiste.id ? 'selected' : '' %>>
+                                        <%= artiste.prenom %> <%= artiste.nom %>
+                                    </option>
+                                <% }); %>
+                            </select>
+                        <% } %>
+                    </div>
+                </div>
+
+                <div class="formulaire-actions">
+                    <a href="/organisation/artworks" class="btn btn--secondaire">Annuler</a>
+                    <button type="submit" class="btn btn--principal">
+                        <i class="fa-solid fa-check"></i> Enregistrer les modifications
+                    </button>
+                </div>
+
+            </form>
+        </div>
+
+        <!-- Zone danger — suppression -->
+        <div class="zone-danger">
+            <h3 class="zone-danger__titre">Zone de danger</h3>
+            <p class="zone-danger__texte">La suppression de cette oeuvre est irréversible et retirera l'oeuvre du catalogue.</p>
+            <form method="POST" action="/organisation/artwork/delete" onsubmit="return confirm('Confirmer la suppression de cette oeuvre ?')">
+                <input type="hidden" name="id" value="<%= oeuvre ? oeuvre.id : '' %>">
+                <button type="submit" class="btn btn--danger">
+                    <i class="fa-solid fa-trash"></i> Supprimer l'oeuvre
+                </button>
+            </form>
+        </div>
+
+    </main>
+
+    <button class="btn-menu-mobile" id="btnMenuMobile" aria-label="Ouvrir le menu">
+        <i class="fa-solid fa-bars"></i>
+    </button>
+
+    <script src="/js/sidebar-mobile.js"></script>
+    <script src="/js/upload-zone.js"></script>
+
+</body>
+</html>

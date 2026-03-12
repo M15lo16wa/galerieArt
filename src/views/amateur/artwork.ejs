@@ -1,0 +1,76 @@
+<%
+/* Données statiques des œuvres — à remplacer par une requête DB */
+const oeuvres = {
+  '1': { titre: 'Lumières de Paris',  artiste: 'Pierre Moreau',   technique: 'Huile sur toile', style: 'Impressionnisme', sujet: 'Paysage',       annee: 2023, dimensions: '80 × 60 cm',  prix: '2 400',  img: '/images/image-catalogue-exposition-1.jpg' },
+  '2': { titre: 'Âmes et Couleurs',   artiste: 'Sophie Blanc',    technique: 'Acrylique',        style: 'Abstrait',        sujet: 'Abstrait',      annee: 2022, dimensions: '100 × 80 cm', prix: '890',    img: '/images/image-catalogue-exposition-2.jpg' },
+  '3': { titre: 'Corps et Espace',    artiste: 'André Leroy',     technique: 'Aquarelle',        style: 'Contemporain',    sujet: 'Corps humain',  annee: 2024, dimensions: '60 × 90 cm',  prix: '3 200',  img: '/images/image-catalogue-exposition-3.jpg' },
+  '4': { titre: 'Horizons',           artiste: 'Maria Santos',    technique: 'Pastel',           style: 'Réalisme',        sujet: 'Paysage',       annee: 2023, dimensions: '70 × 50 cm',  prix: '1 750',  img: '/images/image-catalogue%20exposition.jpg' },
+  '5': { titre: 'Fragments',          artiste: 'Jean-Paul Dumont',technique: 'Acrylique',        style: 'Art brut',        sujet: 'Abstrait',      annee: 2021, dimensions: '50 × 50 cm',  prix: '450',    img: '/images/image-catalogue-4.jpg' },
+  '6': { titre: 'Urbanité',           artiste: 'Camille Renard',  technique: 'Huile sur toile', style: 'Street Art',      sujet: 'Urbain',        annee: 2022, dimensions: '120 × 90 cm', prix: '2 100',  img: '/images/image-catalogue-5.jpg' },
+  '7': { titre: 'Mémoires vives',     artiste: 'Lucie Klein',     technique: 'Encre',            style: 'Expressionnisme', sujet: 'Portrait',      annee: 2023, dimensions: '40 × 60 cm',  prix: '680',    img: '/images/image-catalogue-6.jpg' },
+  '8': { titre: 'Dialogues',          artiste: 'Marc Azur',       technique: 'Mixed media',      style: 'Contemporain',    sujet: 'Abstrait',      annee: 2024, dimensions: '150 × 100 cm',prix: '5 800',  img: '/images/image-catalogue-7.jpg' },
+  '9': { titre: 'Formes libres',      artiste: 'Nina Centrale',   technique: 'Aquarelle',        style: 'Pop Art',         sujet: 'Nature',        annee: 2022, dimensions: '60 × 60 cm',  prix: '1 200',  img: '/images/image-catalogue-8.jpg' },
+};
+const oeuvre = oeuvres[id] || oeuvres['1'];
+%>
+<%- include('../partials/header', { title: oeuvre.titre }) %>
+
+<main class="artwork">
+  <div class="artwork__inner">
+
+    <!-- Fil d'Ariane -->
+    <nav class="artwork__breadcrumb">
+      <a href="/amateur/catalog">Catalogue</a>
+      <span>›</span>
+      <a href="/expositions?cat=peinture">Peinture</a>
+      <span>›</span>
+      <span><%= oeuvre.titre %></span>
+    </nav>
+
+    <div class="artwork__layout">
+
+      <!-- Visuel -->
+      <div class="artwork__visual">
+        <img src="<%= oeuvre.img %>" alt="<%= oeuvre.titre %>" class="artwork__img">
+      </div>
+
+      <!-- Détails -->
+      <div class="artwork__details">
+
+        <h1 class="artwork__title"><%= oeuvre.titre %></h1>
+        <p class="artwork__artist"><%= oeuvre.artiste %></p>
+
+        <ul class="artwork__meta">
+          <li><span class="artwork__meta-label">Technique</span><span class="artwork__meta-value"><%= oeuvre.technique %></span></li>
+          <li><span class="artwork__meta-label">Style</span><span class="artwork__meta-value"><%= oeuvre.style %></span></li>
+          <li><span class="artwork__meta-label">Sujet</span><span class="artwork__meta-value"><%= oeuvre.sujet %></span></li>
+          <li><span class="artwork__meta-label">Année</span><span class="artwork__meta-value"><%= oeuvre.annee %></span></li>
+          <li><span class="artwork__meta-label">Dimensions</span><span class="artwork__meta-value"><%= oeuvre.dimensions %></span></li>
+        </ul>
+
+        <div class="artwork__price-row">
+          <span class="artwork__price"><%= oeuvre.prix %> €</span>
+          <span class="artwork__price-note">Prix de vente · Pièce unique</span>
+        </div>
+
+        <!-- Actions (requièrent une connexion selon le cas d'usage) -->
+        <div class="artwork__actions">
+          <a href="/auth/login" class="artwork__btn artwork__btn--primary">
+            <i class="fa-solid fa-cart-plus"></i> Ajouter au panier
+          </a>
+          <a href="/auth/login" class="artwork__btn artwork__btn--outline">
+            <i class="fa-regular fa-handshake"></i> Faire une offre
+          </a>
+        </div>
+
+        <p class="artwork__login-hint">
+          <a href="/auth/login">Connectez-vous</a> ou <a href="/auth/register">inscrivez-vous</a> pour acheter ou faire une offre.
+        </p>
+
+      </div>
+    </div>
+
+  </div>
+</main>
+
+<%- include('../partials/footer') %>

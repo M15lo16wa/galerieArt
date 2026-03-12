@@ -1,0 +1,185 @@
+<%- include('partials/header', { title: 'Expositions' }) %>
+
+<!-- Barre de filtres actifs (mode compact du partial catalogue) -->
+<%- include('partials/catalogue-filtres', { filterMode: 'compact', query: query }) %>
+
+<main class="expositions">
+  <div class="expositions__inner">
+
+    <!-- En-tête des résultats -->
+    <div class="expositions__header">
+      <h1 class="expositions__title">
+        <% if (query.style || query.technique || query.sujet || query.prix) { %>
+          Œuvres — <span class="expositions__title-filter">
+            <%= query.style || query.technique || query.sujet || query.prix %>
+          </span>
+        <% } else if (query.cat) { %>
+          Œuvres — <span class="expositions__title-filter"><%= query.cat %></span>
+        <% } else { %>
+          Toutes les œuvres
+        <% } %>
+      </h1>
+      <span class="expositions__count">9 résultats</span>
+    </div>
+
+    <!-- Grille des œuvres -->
+    <div class="expositions__grid">
+
+      <a href="/amateur/artwork/1" class="expo-card">
+        <div class="expo-card__img-wrap">
+          <img src="/images/image-catalogue-exposition-1.jpg" alt="Lumières de Paris" class="expo-card__img">
+          <div class="expo-card__overlay">
+            <span class="expo-card__overlay-cta">Voir l'œuvre</span>
+          </div>
+        </div>
+        <div class="expo-card__body">
+          <span class="expo-card__title">Lumières de Paris</span>
+          <span class="expo-card__artist">Pierre Moreau</span>
+          <div class="expo-card__meta">
+            <span class="expo-card__technique">Huile sur toile</span>
+            <span class="expo-card__price">2 400 €</span>
+          </div>
+        </div>
+      </a>
+
+      <a href="/amateur/artwork/2" class="expo-card">
+        <div class="expo-card__img-wrap">
+          <img src="/images/image-catalogue-exposition-2.jpg" alt="Âmes et Couleurs" class="expo-card__img">
+          <div class="expo-card__overlay">
+            <span class="expo-card__overlay-cta">Voir l'œuvre</span>
+          </div>
+        </div>
+        <div class="expo-card__body">
+          <span class="expo-card__title">Âmes et Couleurs</span>
+          <span class="expo-card__artist">Sophie Blanc</span>
+          <div class="expo-card__meta">
+            <span class="expo-card__technique">Acrylique</span>
+            <span class="expo-card__price">890 €</span>
+          </div>
+        </div>
+      </a>
+
+      <a href="/amateur/artwork/3" class="expo-card">
+        <div class="expo-card__img-wrap">
+          <img src="/images/image-catalogue-exposition-3.jpg" alt="Corps et Espace" class="expo-card__img">
+          <div class="expo-card__overlay">
+            <span class="expo-card__overlay-cta">Voir l'œuvre</span>
+          </div>
+        </div>
+        <div class="expo-card__body">
+          <span class="expo-card__title">Corps et Espace</span>
+          <span class="expo-card__artist">André Leroy</span>
+          <div class="expo-card__meta">
+            <span class="expo-card__technique">Aquarelle</span>
+            <span class="expo-card__price">3 200 €</span>
+          </div>
+        </div>
+      </a>
+
+      <a href="/amateur/artwork/4" class="expo-card">
+        <div class="expo-card__img-wrap">
+          <img src="/images/image-catalogue%20exposition.jpg" alt="Horizons" class="expo-card__img">
+          <div class="expo-card__overlay">
+            <span class="expo-card__overlay-cta">Voir l'œuvre</span>
+          </div>
+        </div>
+        <div class="expo-card__body">
+          <span class="expo-card__title">Horizons</span>
+          <span class="expo-card__artist">Maria Santos</span>
+          <div class="expo-card__meta">
+            <span class="expo-card__technique">Pastel</span>
+            <span class="expo-card__price">1 750 €</span>
+          </div>
+        </div>
+      </a>
+
+      <a href="/amateur/artwork/5" class="expo-card">
+        <div class="expo-card__img-wrap">
+          <img src="/images/image-catalogue-4.jpg" alt="Fragments" class="expo-card__img">
+          <div class="expo-card__overlay">
+            <span class="expo-card__overlay-cta">Voir l'œuvre</span>
+          </div>
+        </div>
+        <div class="expo-card__body">
+          <span class="expo-card__title">Fragments</span>
+          <span class="expo-card__artist">Jean-Paul Dumont</span>
+          <div class="expo-card__meta">
+            <span class="expo-card__technique">Acrylique</span>
+            <span class="expo-card__price">450 €</span>
+          </div>
+        </div>
+      </a>
+
+      <a href="/amateur/artwork/6" class="expo-card">
+        <div class="expo-card__img-wrap">
+          <img src="/images/image-catalogue-5.jpg" alt="Urbanité" class="expo-card__img">
+          <div class="expo-card__overlay">
+            <span class="expo-card__overlay-cta">Voir l'œuvre</span>
+          </div>
+        </div>
+        <div class="expo-card__body">
+          <span class="expo-card__title">Urbanité</span>
+          <span class="expo-card__artist">Camille Renard</span>
+          <div class="expo-card__meta">
+            <span class="expo-card__technique">Huile sur toile</span>
+            <span class="expo-card__price">2 100 €</span>
+          </div>
+        </div>
+      </a>
+
+      <a href="/amateur/artwork/7" class="expo-card">
+        <div class="expo-card__img-wrap">
+          <img src="/images/image-catalogue-6.jpg" alt="Mémoires vives" class="expo-card__img">
+          <div class="expo-card__overlay">
+            <span class="expo-card__overlay-cta">Voir l'œuvre</span>
+          </div>
+        </div>
+        <div class="expo-card__body">
+          <span class="expo-card__title">Mémoires vives</span>
+          <span class="expo-card__artist">Lucie Klein</span>
+          <div class="expo-card__meta">
+            <span class="expo-card__technique">Encre</span>
+            <span class="expo-card__price">680 €</span>
+          </div>
+        </div>
+      </a>
+
+      <a href="/amateur/artwork/8" class="expo-card">
+        <div class="expo-card__img-wrap">
+          <img src="/images/image-catalogue-7.jpg" alt="Dialogues" class="expo-card__img">
+          <div class="expo-card__overlay">
+            <span class="expo-card__overlay-cta">Voir l'œuvre</span>
+          </div>
+        </div>
+        <div class="expo-card__body">
+          <span class="expo-card__title">Dialogues</span>
+          <span class="expo-card__artist">Marc Azur</span>
+          <div class="expo-card__meta">
+            <span class="expo-card__technique">Mixed media</span>
+            <span class="expo-card__price">5 800 €</span>
+          </div>
+        </div>
+      </a>
+
+      <a href="/amateur/artwork/9" class="expo-card">
+        <div class="expo-card__img-wrap">
+          <img src="/images/image-catalogue-8.jpg" alt="Formes libres" class="expo-card__img">
+          <div class="expo-card__overlay">
+            <span class="expo-card__overlay-cta">Voir l'œuvre</span>
+          </div>
+        </div>
+        <div class="expo-card__body">
+          <span class="expo-card__title">Formes libres</span>
+          <span class="expo-card__artist">Nina Centrale</span>
+          <div class="expo-card__meta">
+            <span class="expo-card__technique">Aquarelle</span>
+            <span class="expo-card__price">1 200 €</span>
+          </div>
+        </div>
+      </a>
+
+    </div>
+  </div>
+</main>
+
+<%- include('partials/footer') %>

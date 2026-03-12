@@ -1,0 +1,35 @@
+<aside class="sidebar" id="sidebar">
+    <a href="/" class="sidebar__logo">ArtExpo</a>
+    <div class="sidebar__mini-profil">
+        <div class="sidebar__mini-avatar"><i class="fa-solid fa-building"></i></div>
+        <p class="sidebar__mini-nom"><%= organisation.nom %></p>
+        <span class="sidebar__mini-role">Organisation</span>
+    </div>
+    <nav class="sidebar__nav">
+        <a href="/organisation/dashboard" class="sidebar__lien <%= activePage === 'dashboard'   ? 'sidebar__lien--actif' : '' %>">
+            <i class="fa-solid fa-gauge"></i><span>Tableau de bord</span>
+        </a>
+        <a href="/organisation/profile" class="sidebar__lien <%= activePage === 'profile'       ? 'sidebar__lien--actif' : '' %>">
+            <i class="fa-solid fa-building-user"></i><span>Mon Profil</span>
+        </a>
+        <a href="/organisation/artists" class="sidebar__lien <%= activePage === 'artists'       ? 'sidebar__lien--actif' : '' %>">
+            <i class="fa-solid fa-users"></i><span>Artistes</span>
+        </a>
+        <a href="/organisation/artworks" class="sidebar__lien <%= activePage === 'artworks'     ? 'sidebar__lien--actif' : '' %>">
+            <i class="fa-solid fa-palette"></i><span>Oeuvres</span>
+        </a>
+        <a href="/organisation/exhibitions" class="sidebar__lien <%= activePage === 'exhibitions' ? 'sidebar__lien--actif' : '' %>">
+            <i class="fa-solid fa-building-columns"></i><span>Expositions</span>
+        </a>
+        <a href="/organisation/sales" class="sidebar__lien <%= activePage === 'sales'           ? 'sidebar__lien--actif' : '' %>">
+            <i class="fa-solid fa-chart-line"></i><span>Ventes</span>
+        </a>
+    </nav>
+    <div class="sidebar__pied">
+        <a href="/auth/login" class="sidebar__deconnexion">
+            <i class="fa-solid fa-right-from-bracket"></i><span>Se déconnecter</span>
+        </a>
+    </div>
+</aside>
+
+<div class="sidebar-voile" id="sidebarVoile"></div>
