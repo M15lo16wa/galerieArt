@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tableau de bord | ArtExpo</title>
+    <link rel="stylesheet" href="/css/organisation.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body class="organisation-page">
+
+    <%- include('../partials/sidebar-organisation', { organisation, activePage: 'dashboard' }) %>
+
+    <main class="organisation-contenu">
+
+        <div class="page-entete">
+            <h1 class="page-titre">Tableau de bord</h1>
+            <p class="page-sous-titre">Bienvenue, <%= organisation.nom %></p>
+        </div>
+
+        <!-- Statistiques -->
+        <div class="dashboard-stats">
+            <div class="dashboard-stat-carte">
+                <div class="dashboard-stat-carte__icone"><i class="fa-solid fa-palette"></i></div>
+                <div class="dashboard-stat-carte__corps">
+                    <span class="dashboard-stat-carte__valeur"><%= organisation.stats.artworkCount %></span>
+                    <span class="dashboard-stat-carte__libelle">Oeuvres</span>
+                </div>
+            </div>
+            <div class="dashboard-stat-carte">
+                <div class="dashboard-stat-carte__icone"><i class="fa-solid fa-users"></i></div>
+                <div class="dashboard-stat-carte__corps">
+                    <span class="dashboard-stat-carte__valeur"><%= organisation.stats.artistCount %></span>
+                    <span class="dashboard-stat-carte__libelle">Artistes</span>
+                </div>
+            </div>
+            <div class="dashboard-stat-carte">
+                <div class="dashboard-stat-carte__icone"><i class="fa-solid fa-building-columns"></i></div>
+                <div class="dashboard-stat-carte__corps">
+                    <span class="dashboard-stat-carte__valeur"><%= organisation.stats.exhibitionCount %></span>
+                    <span class="dashboard-stat-carte__libelle">Expositions</span>
+                </div>
+            </div>
+            <div class="dashboard-stat-carte">
+                <div class="dashboard-stat-carte__icone"><i class="fa-solid fa-chart-line"></i></div>
+                <div class="dashboard-stat-carte__corps">
+                    <span class="dashboard-stat-carte__valeur"><%= organisation.stats.salesCount %></span>
+                    <span class="dashboard-stat-carte__libelle">Ventes</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Accès rapides -->
+        <div class="section">
+            <h2 class="section__titre">Actions rapides</h2>
+            <div class="acces-rapide">
+                <a href="/organisation/artwork/add" class="carte-action">
+                    <div class="carte-action__icone"><i class="fa-solid fa-plus"></i></div>
+                    <div class="carte-action__corps">
+                        <p class="carte-action__titre">Ajouter une oeuvre</p>
+                        <p class="carte-action__description">Publier une nouvelle création</p>
+                    </div>
+                    <i class="fa-solid fa-chevron-right carte-action__fleche"></i>
+                </a>
+                <a href="/organisation/artworks" class="carte-action">
+                    <div class="carte-action__icone"><i class="fa-solid fa-palette"></i></div>
+                    <div class="carte-action__corps">
+                        <p class="carte-action__titre">Gérer les oeuvres</p>
+                        <p class="carte-action__description">Catalogue complet</p>
+                    </div>
+                    <i class="fa-solid fa-chevron-right carte-action__fleche"></i>
+                </a>
+                <a href="/organisation/artists" class="carte-action">
+                    <div class="carte-action__icone"><i class="fa-solid fa-users"></i></div>
+                    <div class="carte-action__corps">
+                        <p class="carte-action__titre">Gérer les artistes</p>
+                        <p class="carte-action__description">Ajouter, modifier, supprimer</p>
+                    </div>
+                    <i class="fa-solid fa-chevron-right carte-action__fleche"></i>
+                </a>
+                <a href="/organisation/exhibitions" class="carte-action">
+                    <div class="carte-action__icone"><i class="fa-solid fa-building-columns"></i></div>
+                    <div class="carte-action__corps">
+                        <p class="carte-action__titre">Gérer les expositions</p>
+                        <p class="carte-action__description">Planifier et suivre</p>
+                    </div>
+                    <i class="fa-solid fa-chevron-right carte-action__fleche"></i>
+                </a>
+                <a href="/organisation/sales" class="carte-action">
+                    <div class="carte-action__icone"><i class="fa-solid fa-receipt"></i></div>
+                    <div class="carte-action__corps">
+                        <p class="carte-action__titre">Gérer les transactions</p>
+                        <p class="carte-action__description">Commandes et paiements</p>
+                    </div>
+                    <i class="fa-solid fa-chevron-right carte-action__fleche"></i>
+                </a>
+                <a href="/organisation/profile" class="carte-action">
+                    <div class="carte-action__icone"><i class="fa-solid fa-building-user"></i></div>
+                    <div class="carte-action__corps">
+                        <p class="carte-action__titre">Mon profil</p>
+                        <p class="carte-action__description">Informations de la galerie</p>
+                    </div>
+                    <i class="fa-solid fa-chevron-right carte-action__fleche"></i>
+                </a>
+            </div>
+        </div>
+
+    </main>
+
+    <button class="btn-menu-mobile" id="btnMenuMobile" aria-label="Ouvrir le menu">
+        <i class="fa-solid fa-bars"></i>
+    </button>
+
+    <script src="/js/sidebar-mobile.js"></script>
+
+</body>
+</html>

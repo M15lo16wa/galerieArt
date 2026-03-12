@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mon profil | ArtExpo</title>
+    <link rel="stylesheet" href="/css/organisation.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body class="organisation-page">
+
+    <%- include('../partials/sidebar-organisation', { organisation, activePage: 'profile' }) %>
+
+    <main class="organisation-contenu">
+
+        <div class="page-entete">
+            <h1 class="page-titre">Mon profil</h1>
+            <p class="page-sous-titre">Informations de la galerie</p>
+        </div>
+
+        <!-- Hero profil -->
+        <div class="profil-hero" style="margin-bottom:2rem;">
+            <div class="profil-hero__couverture"></div>
+            <div class="profil-hero__corps">
+                <div class="profil-hero__avatar-conteneur">
+                    <div class="profil-hero__avatar"><i class="fa-solid fa-building"></i></div>
+                </div>
+                <div class="profil-hero__infos">
+                    <p class="profil-hero__nom"><%= organisation.nom %></p>
+                    <p class="profil-hero__discipline">Organisation / Galerie</p>
+                </div>
+                <div class="profil-hero__stats">
+                    <div>
+                        <span class="stat__valeur"><%= organisation.stats.artworkCount %></span>
+                        <span class="stat__libelle">Oeuvres</span>
+                    </div>
+                    <div class="stat__separateur"></div>
+                    <div>
+                        <span class="stat__valeur"><%= organisation.stats.artistCount %></span>
+                        <span class="stat__libelle">Artistes</span>
+                    </div>
+                    <div class="stat__separateur"></div>
+                    <div>
+                        <span class="stat__valeur"><%= organisation.stats.exhibitionCount %></span>
+                        <span class="stat__libelle">Expositions</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Formulaire profil -->
+        <div class="formulaire-carte">
+            <form method="POST" action="/organisation/profile" class="formulaire-profil">
+
+                <div class="formulaire-grille">
+                    <div class="champ">
+                        <label class="champ__label champ__label--obligatoire" for="champNom">Nom de la galerie</label>
+                        <input class="champ__input" type="text" id="champNom" name="nom"
+                            value="<%= organisation.nom %>" required>
+                    </div>
+                    <div class="champ">
+                        <label class="champ__label" for="champEmail">Email</label>
+                        <input class="champ__input champ__input--lecture-seule" type="email" id="champEmail"
+                            name="email" value="" readonly>
+                    </div>
+                </div>
+
+                <div class="champ">
+                    <label class="champ__label" for="champDescription">Description</label>
+                    <textarea class="champ__textarea" id="champDescription" name="description"
+                        rows="4" placeholder="Décrivez votre galerie, sa mission, son histoire..."></textarea>
+                </div>
+
+                <div class="formulaire-grille">
+                    <div class="champ">
+                        <label class="champ__label" for="champVille">Ville</label>
+                        <input class="champ__input" type="text" id="champVille" name="ville" placeholder="Ex : Paris">
+                    </div>
+                    <div class="champ">
+                        <label class="champ__label" for="champPays">Pays</label>
+                        <input class="champ__input" type="text" id="champPays" name="pays" placeholder="Ex : France">
+                    </div>
+                </div>
+
+                <div class="champ">
+                    <label class="champ__label" for="champSiteWeb">Site web</label>
+                    <input class="champ__input" type="url" id="champSiteWeb" name="siteWeb"
+                        placeholder="Ex : https://magalerie.fr">
+                </div>
+
+                <div class="formulaire-actions">
+                    <button type="submit" class="btn btn--principal">
+                        <i class="fa-solid fa-check"></i> Enregistrer
+                    </button>
+                </div>
+
+            </form>
+        </div>
+
+    </main>
+
+    <button class="btn-menu-mobile" id="btnMenuMobile" aria-label="Ouvrir le menu">
+        <i class="fa-solid fa-bars"></i>
+    </button>
+
+    <script src="/js/sidebar-mobile.js"></script>
+
+</body>
+</html>

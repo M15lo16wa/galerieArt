@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gérer les transactions | ArtExpo</title>
+    <link rel="stylesheet" href="/css/organisation.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body class="organisation-page">
+
+    <%- include('../partials/sidebar-organisation', { organisation, activePage: 'sales' }) %>
+
+    <main class="organisation-contenu">
+
+        <div class="page-entete">
+            <h1 class="page-titre">Gérer les transactions</h1>
+            <p class="page-sous-titre">Demandes, commandes et suivi des paiements</p>
+        </div>
+
+        <!-- Statistiques -->
+        <div class="dashboard-stats">
+            <div class="dashboard-stat-carte">
+                <div class="dashboard-stat-carte__icone"><i class="fa-solid fa-inbox"></i></div>
+                <div class="dashboard-stat-carte__corps">
+                    <span class="dashboard-stat-carte__valeur">0</span>
+                    <span class="dashboard-stat-carte__libelle">Demandes reçues</span>
+                </div>
+            </div>
+            <div class="dashboard-stat-carte">
+                <div class="dashboard-stat-carte__icone"><i class="fa-solid fa-circle-check"></i></div>
+                <div class="dashboard-stat-carte__corps">
+                    <span class="dashboard-stat-carte__valeur">0</span>
+                    <span class="dashboard-stat-carte__libelle">Commandes validées</span>
+                </div>
+            </div>
+            <div class="dashboard-stat-carte">
+                <div class="dashboard-stat-carte__icone"><i class="fa-solid fa-clock-rotate-left"></i></div>
+                <div class="dashboard-stat-carte__corps">
+                    <span class="dashboard-stat-carte__valeur">0</span>
+                    <span class="dashboard-stat-carte__libelle">Paiements en attente</span>
+                </div>
+            </div>
+            <div class="dashboard-stat-carte">
+                <div class="dashboard-stat-carte__icone"><i class="fa-solid fa-euro-sign"></i></div>
+                <div class="dashboard-stat-carte__corps">
+                    <span class="dashboard-stat-carte__valeur">0 €</span>
+                    <span class="dashboard-stat-carte__libelle">Revenus totaux</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Filtres -->
+        <div class="filtres">
+            <button class="filtre-btn filtre-btn--actif" data-filtre="toutes">Toutes</button>
+            <button class="filtre-btn" data-filtre="demande">Demandes</button>
+            <button class="filtre-btn" data-filtre="validee">Validées</button>
+            <button class="filtre-btn" data-filtre="paiement">Paiement suivi</button>
+        </div>
+
+        <!-- Tableau des transactions -->
+        <div class="tableau-conteneur">
+            <div class="etat-vide">
+                <i class="fa-solid fa-receipt etat-vide__icone"></i>
+                <p class="etat-vide__texte">Aucune transaction enregistrée</p>
+                <p class="etat-vide__sous-texte">Les demandes d'achat apparaîtront ici</p>
+            </div>
+        </div>
+
+    </main>
+
+    <button class="btn-menu-mobile" id="btnMenuMobile" aria-label="Ouvrir le menu">
+        <i class="fa-solid fa-bars"></i>
+    </button>
+
+    <script src="/js/sidebar-mobile.js"></script>
+
+</body>
+</html>

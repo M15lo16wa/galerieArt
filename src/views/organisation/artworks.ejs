@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gérer les oeuvres | ArtExpo</title>
+    <link rel="stylesheet" href="/css/organisation.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body class="organisation-page">
+
+    <%- include('../partials/sidebar-organisation', { organisation, activePage: 'artworks' }) %>
+
+    <main class="organisation-contenu">
+
+        <div class="page-entete page-entete--flex">
+            <div>
+                <h1 class="page-titre">Gérer les oeuvres</h1>
+                <p class="page-sous-titre">Catalogue complet des oeuvres de la galerie</p>
+            </div>
+            <a href="/organisation/artwork/add" class="btn btn--principal">
+                <i class="fa-solid fa-plus"></i> Ajouter une oeuvre
+            </a>
+        </div>
+
+        <!-- Statistiques -->
+        <div class="dashboard-stats">
+            <div class="dashboard-stat-carte">
+                <div class="dashboard-stat-carte__icone"><i class="fa-solid fa-palette"></i></div>
+                <div class="dashboard-stat-carte__corps">
+                    <span class="dashboard-stat-carte__valeur"><%= oeuvres.length %></span>
+                    <span class="dashboard-stat-carte__libelle">Total oeuvres</span>
+                </div>
+            </div>
+            <div class="dashboard-stat-carte">
+                <div class="dashboard-stat-carte__icone"><i class="fa-solid fa-tag"></i></div>
+                <div class="dashboard-stat-carte__corps">
+                    <span class="dashboard-stat-carte__valeur"><%= oeuvres.filter(function(o){ return o.disponibilite === 'disponible'; }).length %></span>
+                    <span class="dashboard-stat-carte__libelle">Disponibles</span>
+                </div>
+            </div>
+            <div class="dashboard-stat-carte">
+                <div class="dashboard-stat-carte__icone"><i class="fa-solid fa-building-columns"></i></div>
+                <div class="dashboard-stat-carte__corps">
+                    <span class="dashboard-stat-carte__valeur"><%= oeuvres.filter(function(o){ return o.disponibilite === 'exposition'; }).length %></span>
+                    <span class="dashboard-stat-carte__libelle">En exposition</span>
+                </div>
+            </div>
+            <div class="dashboard-stat-carte">
+                <div class="dashboard-stat-carte__icone"><i class="fa-solid fa-circle-check"></i></div>
+                <div class="dashboard-stat-carte__corps">
+                    <span class="dashboard-stat-carte__valeur"><%= oeuvres.filter(function(o){ return o.disponibilite === 'vendu'; }).length %></span>
+                    <span class="dashboard-stat-carte__libelle">Vendues</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Filtres -->
+        <div class="filtres">
+            <button class="filtre-btn filtre-btn--actif" data-filtre="tous">Toutes</button>
+            <button class="filtre-btn" data-filtre="disponible">Disponibles</button>
+            <button class="filtre-btn" data-filtre="exposition">En exposition</button>
+            <button class="filtre-btn" data-filtre="vendu">Vendues</button>
+            <button class="filtre-btn" data-filtre="publique">Publiques</button>
+            <button class="filtre-btn" data-filtre="privee">Privées</button>
+            <button class="filtre-btn" data-filtre="reservee">Réservées</button>
+        </div>
+
+        <!-- Tableau -->
+        <div class="tableau-conteneur">
+            <% if (oeuvres.length === 0) { %>
+                <div class="etat-vide">
+                    <i class="fa-regular fa-image etat-vide__icone"></i>
+                    <p class="etat-vide__texte">Aucune oeuvre dans le catalogue</p>
+                    <p class="etat-vide__sous-texte">Ajoutez votre première oeuvre pour commencer</p>
+                    <a href="/organisation/artwork/add" class="btn btn--principal" style="margin-top:1rem;">
+                        <i class="fa-solid fa-plus"></i> Ajouter une oeuvre
+                    </a>
+                </div>
+            <% } else { %>
+                <table class="tableau">
+                    <thead>
+                        <tr>
+                            <th>Oeuvre</th>
+                            <th>Artiste</th>
+                            <th>Prix</th>
+                            <th>Disponibilité</th>
+                            <th>Visibilité</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% oeuvres.forEach(function(oeuvre) { %>
+                        <tr data-disponibilite="<%= oeuvre.disponibilite %>" data-visibilite="<%= oeuvre.visibilite %>">
+                            <td>
+                                <div class="tableau__oeuvre-info">
+                                    <% if (oeuvre.image) { %>
+                                        <img src="<%= oeuvre.image %>" alt="<%= oeuvre.titre %>" class="tableau__miniature-img">
+                                    <% } else { %>
+                                        <div class="tableau__miniature"><i class="fa-regular fa-image"></i></div>
+                                    <% } %>
+                                    <span class="tableau__titre"><%= oeuvre.titre %></span>
+                                </div>
+                            </td>
+                            <td><%= oeuvre.artiste || '—' %></td>
+                            <td><%= oeuvre.prix ? oeuvre.prix.toLocaleString('fr-FR') + ' €' : '—' %></td>
+                            <td>
+                                <% if (oeuvre.disponibilite === 'disponible') { %>
+                                    <span class="badge badge--disponible"><i class="fa-solid fa-circle" style="font-size:0.45rem;"></i> Disponible</span>
+                                <% } else if (oeuvre.disponibilite === 'exposition') { %>
+                                    <span class="badge badge--exposition"><i class="fa-solid fa-circle" style="font-size:0.45rem;"></i> En exposition</span>
+                                <% } else { %>
+                                    <span class="badge badge--vendu"><i class="fa-solid fa-circle" style="font-size:0.45rem;"></i> Vendu</span>
+                                <% } %>
+                            </td>
+                            <td>
+                                <% if (oeuvre.visibilite === 'privee') { %>
+                                    <span class="badge badge--privee"><i class="fa-solid fa-lock" style="font-size:0.6rem;"></i> Privée</span>
+                                <% } else if (oeuvre.visibilite === 'reservee') { %>
+                                    <span class="badge badge--reservee"><i class="fa-solid fa-bookmark" style="font-size:0.6rem;"></i> Réservée</span>
+                                <% } else { %>
+                                    <span class="badge badge--publique"><i class="fa-solid fa-globe" style="font-size:0.6rem;"></i> Publique</span>
+                                <% } %>
+                            </td>
+                            <td>
+                                <div class="tableau__actions">
+                                    <a href="/organisation/artwork/edit/<%= oeuvre.id %>" class="btn-action btn-action--modifier">
+                                        <i class="fa-solid fa-pen"></i> Modifier
+                                    </a>
+                                    <form method="POST" action="/organisation/artwork/delete" onsubmit="return confirm('Supprimer cette oeuvre ?')">
+                                        <input type="hidden" name="id" value="<%= oeuvre.id %>">
+                                        <button type="submit" class="btn-action btn-action--supprimer">
+                                            <i class="fa-solid fa-trash"></i>
+                                        </button>
+                                    </form>
+                                </div>
+                            </td>
+                        </tr>
+                        <% }); %>
+                    </tbody>
+                </table>
+            <% } %>
+        </div>
+
+    </main>
+
+    <button class="btn-menu-mobile" id="btnMenuMobile" aria-label="Ouvrir le menu">
+        <i class="fa-solid fa-bars"></i>
+    </button>
+
+    <script src="/js/sidebar-mobile.js"></script>
+    <script>
+        // Filtres tableau
+        var filtresBtns = document.querySelectorAll('.filtre-btn');
+        var lignes      = document.querySelectorAll('.tableau tbody tr');
+        filtresBtns.forEach(function(btn) {
+            btn.addEventListener('click', function() {
+                filtresBtns.forEach(function(b) { b.classList.remove('filtre-btn--actif'); });
+                btn.classList.add('filtre-btn--actif');
+                var filtre = btn.dataset.filtre;
+                lignes.forEach(function(ligne) {
+                    if (filtre === 'tous') {
+                        ligne.style.display = '';
+                    } else if (filtre === 'publique' || filtre === 'privee' || filtre === 'reservee') {
+                        ligne.style.display = ligne.dataset.visibilite === filtre ? '' : 'none';
+                    } else {
+                        ligne.style.display = ligne.dataset.disponibilite === filtre ? '' : 'none';
+                    }
+                });
+            });
+        });
+    </script>
+
+</body>
+</html>

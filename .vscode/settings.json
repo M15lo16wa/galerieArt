@@ -1,4 +1,7 @@
 {
+    "css.validate": false,
+    "less.validate": false,
+    "scss.validate": false,
     "cSpell.language": "en,fr",
     "cSpell.enabledLanguageIds": [
         "javascript",

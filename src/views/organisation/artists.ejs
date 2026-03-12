@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gérer les artistes | ArtExpo</title>
+    <link rel="stylesheet" href="/css/organisation.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body class="organisation-page">
+
+    <%- include('../partials/sidebar-organisation', { organisation, activePage: 'artists' }) %>
+
+    <main class="organisation-contenu">
+
+        <div class="page-entete page-entete--flex">
+            <div>
+                <h1 class="page-titre">Gérer les artistes</h1>
+                <p class="page-sous-titre">Artistes associés à la galerie</p>
+            </div>
+            <a href="#" class="btn btn--principal">
+                <i class="fa-solid fa-plus"></i> Ajouter un artiste
+            </a>
+        </div>
+
+        <!-- Statistiques -->
+        <div class="dashboard-stats">
+            <div class="dashboard-stat-carte">
+                <div class="dashboard-stat-carte__icone"><i class="fa-solid fa-users"></i></div>
+                <div class="dashboard-stat-carte__corps">
+                    <span class="dashboard-stat-carte__valeur"><%= organisation.stats.artistCount %></span>
+                    <span class="dashboard-stat-carte__libelle">Total artistes</span>
+                </div>
+            </div>
+            <div class="dashboard-stat-carte">
+                <div class="dashboard-stat-carte__icone"><i class="fa-solid fa-palette"></i></div>
+                <div class="dashboard-stat-carte__corps">
+                    <span class="dashboard-stat-carte__valeur"><%= organisation.stats.artworkCount %></span>
+                    <span class="dashboard-stat-carte__libelle">Oeuvres liées</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tableau des artistes -->
+        <div class="tableau-conteneur">
+            <div class="etat-vide">
+                <i class="fa-solid fa-users etat-vide__icone"></i>
+                <p class="etat-vide__texte">Aucun artiste associé</p>
+                <p class="etat-vide__sous-texte">Ajoutez des artistes pour gérer leur catalogue</p>
+                <a href="#" class="btn btn--principal" style="margin-top:1rem;">
+                    <i class="fa-solid fa-plus"></i> Ajouter un artiste
+                </a>
+            </div>
+        </div>
+
+    </main>
+
+    <button class="btn-menu-mobile" id="btnMenuMobile" aria-label="Ouvrir le menu">
+        <i class="fa-solid fa-bars"></i>
+    </button>
+
+    <script src="/js/sidebar-mobile.js"></script>
+
+</body>
+</html>

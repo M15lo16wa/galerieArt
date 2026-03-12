@@ -1,10 +1,4 @@
 <%
-/*
-  Partial : catalogue-filtres.ejs
-  Variables attendues depuis le parent :
-    - filterMode  : 'full' (défaut, page catalogue) | 'compact' (page expositions)
-    - query       : req.query (utilisé en mode compact pour afficher les filtres actifs)
-*/
   const _mode     = typeof filterMode !== 'undefined' ? filterMode : 'full';
   const _cat      = (typeof query !== 'undefined' && query.cat)       ? query.cat       : 'peinture';
   const _style    = (typeof query !== 'undefined' && query.style)     ? query.style     : null;

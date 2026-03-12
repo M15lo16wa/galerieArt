@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gérer les expositions | ArtExpo</title>
+    <link rel="stylesheet" href="/css/organisation.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body class="organisation-page">
+
+    <%- include('../partials/sidebar-organisation', { organisation, activePage: 'exhibitions' }) %>
+
+    <main class="organisation-contenu">
+
+        <div class="page-entete page-entete--flex">
+            <div>
+                <h1 class="page-titre">Gérer les expositions</h1>
+                <p class="page-sous-titre">Planification et suivi des événements</p>
+            </div>
+            <a href="/organisation/exhibition/add" class="btn btn--principal">
+                <i class="fa-solid fa-plus"></i> Ajouter une exposition
+            </a>
+        </div>
+
+        <!-- Filtres -->
+        <div class="filtres">
+            <button class="filtre-btn filtre-btn--actif" data-filtre="toutes">Toutes</button>
+            <button class="filtre-btn" data-filtre="a-venir">À venir</button>
+            <button class="filtre-btn" data-filtre="en-cours">En cours</button>
+            <button class="filtre-btn" data-filtre="passees">Passées</button>
+        </div>
+
+        <!-- Liste des expositions -->
+        <div class="tableau-conteneur">
+            <div class="etat-vide">
+                <i class="fa-solid fa-building-columns etat-vide__icone"></i>
+                <p class="etat-vide__texte">Aucune exposition planifiée</p>
+                <p class="etat-vide__sous-texte">Créez votre première exposition pour y associer des oeuvres</p>
+                <a href="/organisation/exhibition/add" class="btn btn--principal" style="margin-top:1rem;">
+                    <i class="fa-solid fa-plus"></i> Ajouter une exposition
+                </a>
+            </div>
+        </div>
+
+    </main>
+
+    <button class="btn-menu-mobile" id="btnMenuMobile" aria-label="Ouvrir le menu">
+        <i class="fa-solid fa-bars"></i>
+    </button>
+
+    <script src="/js/sidebar-mobile.js"></script>
+
+</body>
+</html>
