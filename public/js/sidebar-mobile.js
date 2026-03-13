@@ -1,7 +1,7 @@
 (function () {
-    var btnMenuMobile = document.getElementById('btnMenuMobile');
-    var sidebar       = document.getElementById('sidebar');
-    var sidebarVoile  = document.getElementById('sidebarVoile');
+    const btnMenuMobile = document.getElementById('btnMenuMobile');
+    const sidebar = document.getElementById('sidebar');
+    const sidebarVoile = document.getElementById('sidebarVoile');
 
     btnMenuMobile.addEventListener('click', function () {
         sidebar.classList.toggle('sidebar--ouverte');

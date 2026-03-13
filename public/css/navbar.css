@@ -12,30 +12,16 @@
     min-height: 260px;
     padding: 0 2rem 2.5rem;
     background-color: #0d0d0d;
-    /* fallback if image fails to load */
     background:
-        /* vignette: dark edges, open center to let the window light through */
+        /* vignette */
         radial-gradient(ellipse 80% 70% at 50% 45%,
             rgba(0, 0, 0, 0.05) 0%,
             rgba(0, 0, 0, 0.45) 100%),
-        /* top bar overlay so nav links stay readable */
+        /* barre haute lisible */
         linear-gradient(to bottom, rgba(0, 0, 0, 0.5) 0%, transparent 25%),
         url('/images/navImage.jpg') center 42% / cover no-repeat;
     position: relative;
-    z-index: 1;
-}
-
-
-/* Bottom fade — melts navbar into the slider below */
-.navbar::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    height: 70px;
-    background: linear-gradient(to bottom, transparent, #0d0d0d);
-    pointer-events: none;
+    z-index: 10;
 }
 
 /* Logo — second row, horizontally centered */
@@ -81,7 +67,8 @@
     gap: 2rem;
 }
 
-.navbar__links a {
+.navbar__links > a,
+.navbar__item-link {
     font-size: 0.875rem;
     color: #e8e8e8;
     text-decoration: none;
@@ -89,8 +76,127 @@
     transition: color 0.2s ease;
 }
 
-.navbar__links a:hover {
+.navbar__links > a:hover,
+.navbar__item:hover .navbar__item-link {
     color: #ffffff;
+}
+
+/* ----- Mega-menu Catalogue ----- */
+
+.navbar__item {
+    position: relative;
+    display: flex;
+    align-items: center;
+    z-index: 10;
+}
+
+.navbar__mega {
+    position: absolute;
+    top: calc(100% + 12px);
+    left: 0;
+    width: 620px;
+    background: #ffffff;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 6px;
+    padding: 1.25rem;
+    z-index: 200;
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(-6px);
+    transition: opacity 0.2s ease, transform 0.2s ease;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+}
+
+.navbar__mega--visible {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0);
+}
+
+/* Onglets catégories */
+.navbar__mega-tabs {
+    display: flex;
+    gap: 0;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+    margin-bottom: 1rem;
+}
+
+.navbar__mega-tab {
+    background: none;
+    border: none;
+    border-bottom: 2px solid transparent;
+    color: #777;
+    font-size: 0.8rem;
+    font-family: inherit;
+    padding: 0.5rem 1rem 0.6rem;
+    cursor: pointer;
+    transition: color 0.15s, border-color 0.15s;
+    white-space: nowrap;
+}
+
+.navbar__mega-tab:hover {
+    color: #111;
+}
+
+.navbar__mega-tab--active {
+    color: #111;
+    border-bottom-color: #111;
+    font-weight: 600;
+}
+
+/* Datasets */
+.navbar__mega-data {
+    display: none;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0;
+}
+
+.navbar__mega-data--active {
+    display: grid;
+}
+
+/* Colonnes */
+.navbar__mega-col {
+    padding: 0 1rem 0 0;
+    border-right: 1px solid rgba(0, 0, 0, 0.07);
+}
+
+.navbar__mega-col:last-child {
+    border-right: none;
+    padding-right: 0;
+    padding-left: 1rem;
+}
+
+.navbar__mega-col:not(:first-child):not(:last-child) {
+    padding-left: 1rem;
+}
+
+.navbar__mega-heading {
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #888;
+    margin-bottom: 0.7rem;
+}
+
+.navbar__mega-col ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.45rem;
+}
+
+.navbar__mega-col ul a {
+    font-size: 0.82rem;
+    color: #333;
+    text-decoration: none;
+    text-shadow: none;
+    transition: color 0.15s;
+}
+
+.navbar__mega-col ul a:hover {
+    color: #000;
 }
 
 /* User actions — first row, right */

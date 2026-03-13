@@ -2,6 +2,12 @@
    CATALOGUE
    ========================================= */
 
+/* ----- Fond de page ----- */
+
+.catalogue {
+  background: #ffffff;
+}
+
 /* ----- Barre d'onglets ----- */
 
 .catalogue__tabs {
@@ -24,7 +30,7 @@
   background: none;
   border: none;
   border-bottom: 2px solid transparent;
-  color: #666;
+  color: #333;
   font-size: 0.875rem;
   font-family: inherit;
   cursor: pointer;
@@ -93,7 +99,7 @@
   font-weight: 700;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: #888;
+  color: #444;
   margin-bottom: 1rem;
 }
 
@@ -105,7 +111,7 @@
 }
 
 .cat-col__list a {
-  color: #333;
+  color: #111;
   text-decoration: none;
   font-size: 0.875rem;
   transition: color 0.15s ease;
@@ -143,7 +149,7 @@
 
 .catalogue__results-count {
   font-size: 0.8rem;
-  color: #888;
+  color: #555;
 }
 
 .catalogue__grid {
@@ -157,16 +163,20 @@
 .catalogue__card {
   display: block;
   text-decoration: none;
-  background: #ffffff;
   border-radius: 6px;
-  overflow: hidden;
   border: 1px solid rgba(0, 0, 0, 0.09);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  transition: transform 0.22s ease, box-shadow 0.22s ease;
 }
 
 .catalogue__card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.12);
+  transform: translateY(-5px);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.14);
+}
+
+.catalogue__card-img-wrap {
+  position: relative;
+  overflow: hidden;
+  border-radius: 6px;
 }
 
 .catalogue__card-img {
@@ -174,10 +184,27 @@
   aspect-ratio: 4 / 3;
   object-fit: cover;
   display: block;
+  transition: transform 0.4s ease;
+}
+
+.catalogue__card:hover .catalogue__card-img {
+  transform: scale(1.04);
 }
 
 .catalogue__card-body {
-  padding: 1rem 1.1rem 1.1rem;
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 1.1rem;
+  background: linear-gradient(to top, rgb(255, 255, 255) 0%, rgb(255, 253, 253) 60%, transparent 100%);
+  opacity: 0;
+  transition: opacity 0.28s ease;
+}
+
+.catalogue__card:hover .catalogue__card-body {
+  opacity: 1;
 }
 
 .catalogue__card-title {
@@ -185,14 +212,14 @@
   font-size: 0.95rem;
   font-weight: 600;
   color: #111;
-  margin-bottom: 0.3rem;
+  margin-bottom: 0.25rem;
 }
 
 .catalogue__card-meta {
   display: block;
   font-size: 0.78rem;
-  color: #666;
-  margin-bottom: 0.9rem;
+  color: #444;
+  margin-bottom: 0.75rem;
 }
 
 .catalogue__card-footer {
@@ -209,16 +236,16 @@
 
 .catalogue__card-cta {
   font-size: 0.75rem;
-  color: #555;
-  border: 1px solid rgba(0, 0, 0, 0.2);
+  color: #333;
+  border: 1px solid rgba(0, 0, 0, 0.3);
   padding: 0.3rem 0.8rem;
   border-radius: 3px;
-  transition: color 0.15s ease, border-color 0.15s ease;
+  transition: border-color 0.15s ease, background 0.15s ease;
 }
 
 .catalogue__card:hover .catalogue__card-cta {
-  color: #000;
-  border-color: rgba(0, 0, 0, 0.5);
+  border-color: #111;
+  background: rgba(0, 0, 0, 0.05);
 }
 
 /* =========================================

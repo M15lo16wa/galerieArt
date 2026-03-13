@@ -22,7 +22,7 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   function activateTab(tab) {
-    const cat = tab.dataset.cat;
+    const {cat} = tab.dataset.cat;
 
     // Mise à jour des onglets
     tabs.forEach(t => {

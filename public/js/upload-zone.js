@@ -1,11 +1,11 @@
 (function () {
-    var zoneUpload        = document.getElementById('zoneUpload');
-    var champImage        = document.getElementById('champImage');
-    var zoneApercu        = document.getElementById('zoneApercu');
-    var apercuImage       = document.getElementById('apercuImage');
-    var zoneUploadContenu = document.getElementById('zoneUploadContenu');
-    var btnSupprimer      = document.getElementById('btnSupprimerImage');
-    var MAX_SIZE          = 500 * 1024 * 1024;
+    const zoneUpload        = document.getElementById('zoneUpload');
+    const champImage        = document.getElementById('champImage');
+    const zoneApercu        = document.getElementById('zoneApercu');
+    const apercuImage       = document.getElementById('apercuImage');
+    const zoneUploadContenu = document.getElementById('zoneUploadContenu');
+    const btnSupprimer      = document.getElementById('btnSupprimerImage');
+    const MAX_SIZE          = 500 * 1024 * 1024;
 
     function afficherApercu(file) {
         if (!file) return;
@@ -14,7 +14,7 @@
             champImage.value = '';
             return;
         }
-        var reader = new FileReader();
+        const reader = new FileReader();
         reader.onload = function (e) {
             apercuImage.src = e.target.result;
             zoneApercu.style.display = 'block';
@@ -44,9 +44,9 @@
     zoneUpload.addEventListener('drop', function (e) {
         e.preventDefault();
         zoneUpload.classList.remove('zone-upload--survol');
-        var file = e.dataTransfer.files[0];
+        const file = e.dataTransfer.files[0];
         if (file && file.type.startsWith('image/')) {
-            var dt = new DataTransfer();
+            const dt = new DataTransfer();
             dt.items.add(file);
             champImage.files = dt.files;
             afficherApercu(file);

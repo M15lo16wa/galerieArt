@@ -5,7 +5,103 @@
 
   <!-- Liens principaux -->
   <nav class="navbar__links">
-    <a href="/amateur/catalog">Catalogue</a>
+
+    <!-- Catalogue avec mega-menu au survol -->
+    <div class="navbar__item">
+      <a href="/amateur/catalog" class="navbar__item-link">Catalogue</a>
+      <div class="navbar__mega">
+
+        <!-- Onglets catégories -->
+        <div class="navbar__mega-tabs">
+          <button class="navbar__mega-tab navbar__mega-tab--active" data-mega="peinture">Peinture</button>
+          <button class="navbar__mega-tab" data-mega="sculpture">Sculpture</button>
+          <button class="navbar__mega-tab" data-mega="photographie">Photographie</button>
+          <button class="navbar__mega-tab" data-mega="dessin">Dessin</button>
+        </div>
+
+        <!-- Peinture -->
+        <div class="navbar__mega-data navbar__mega-data--active" data-mega="peinture">
+          <div class="navbar__mega-col">
+            <h4 class="navbar__mega-heading">Style</h4>
+            <ul><li><a href="/expositions?cat=peinture&style=abstrait">Abstrait</a></li><li><a href="/expositions?cat=peinture&style=art-brut">Art brut</a></li><li><a href="/expositions?cat=peinture&style=expressionnisme">Expressionnisme</a></li><li><a href="/expositions?cat=peinture&style=impressionnisme">Impressionnisme</a></li><li><a href="/expositions?cat=peinture&style=pop-art">Pop Art</a></li><li><a href="/expositions?cat=peinture&style=street-art">Street Art</a></li></ul>
+          </div>
+          <div class="navbar__mega-col">
+            <h4 class="navbar__mega-heading">Technique</h4>
+            <ul><li><a href="/expositions?cat=peinture&technique=acrylique">Acrylique</a></li><li><a href="/expositions?cat=peinture&technique=aquarelle">Aquarelle</a></li><li><a href="/expositions?cat=peinture&technique=huile">Huile</a></li><li><a href="/expositions?cat=peinture&technique=pastel">Pastel</a></li></ul>
+          </div>
+          <div class="navbar__mega-col">
+            <h4 class="navbar__mega-heading">Sujet</h4>
+            <ul><li><a href="/expositions?cat=peinture&sujet=animal">Animal</a></li><li><a href="/expositions?cat=peinture&sujet=fleur">Fleur</a></li><li><a href="/expositions?cat=peinture&sujet=marine">Marine</a></li><li><a href="/expositions?cat=peinture&sujet=paysage">Paysage</a></li><li><a href="/expositions?cat=peinture&sujet=portrait">Portrait</a></li></ul>
+          </div>
+          <div class="navbar__mega-col">
+            <h4 class="navbar__mega-heading">Prix (€)</h4>
+            <ul><li><a href="/expositions?cat=peinture&prix=moins-500">Moins de 500</a></li><li><a href="/expositions?cat=peinture&prix=500-1000">500 – 1 000</a></li><li><a href="/expositions?cat=peinture&prix=1000-5000">1 000 – 5 000</a></li><li><a href="/expositions?cat=peinture&prix=plus-5000">Plus de 5 000</a></li></ul>
+          </div>
+        </div>
+
+        <!-- Sculpture -->
+        <div class="navbar__mega-data" data-mega="sculpture">
+          <div class="navbar__mega-col">
+            <h4 class="navbar__mega-heading">Style</h4>
+            <ul><li><a href="/expositions?cat=sculpture&style=abstrait">Abstrait</a></li><li><a href="/expositions?cat=sculpture&style=classique">Classique</a></li><li><a href="/expositions?cat=sculpture&style=contemporain">Contemporain</a></li><li><a href="/expositions?cat=sculpture&style=figuratif">Figuratif</a></li></ul>
+          </div>
+          <div class="navbar__mega-col">
+            <h4 class="navbar__mega-heading">Technique</h4>
+            <ul><li><a href="/expositions?cat=sculpture&technique=bois">Bois</a></li><li><a href="/expositions?cat=sculpture&technique=bronze">Bronze</a></li><li><a href="/expositions?cat=sculpture&technique=ceramique">Céramique</a></li><li><a href="/expositions?cat=sculpture&technique=marbre">Marbre</a></li></ul>
+          </div>
+          <div class="navbar__mega-col">
+            <h4 class="navbar__mega-heading">Sujet</h4>
+            <ul><li><a href="/expositions?cat=sculpture&sujet=animal">Animal</a></li><li><a href="/expositions?cat=sculpture&sujet=corps-humain">Corps humain</a></li><li><a href="/expositions?cat=sculpture&sujet=portrait">Portrait</a></li></ul>
+          </div>
+          <div class="navbar__mega-col">
+            <h4 class="navbar__mega-heading">Prix (€)</h4>
+            <ul><li><a href="/expositions?cat=sculpture&prix=moins-500">Moins de 500</a></li><li><a href="/expositions?cat=sculpture&prix=500-1000">500 – 1 000</a></li><li><a href="/expositions?cat=sculpture&prix=1000-5000">1 000 – 5 000</a></li><li><a href="/expositions?cat=sculpture&prix=plus-5000">Plus de 5 000</a></li></ul>
+          </div>
+        </div>
+
+        <!-- Photographie -->
+        <div class="navbar__mega-data" data-mega="photographie">
+          <div class="navbar__mega-col">
+            <h4 class="navbar__mega-heading">Style</h4>
+            <ul><li><a href="/expositions?cat=photographie&style=contemporain">Contemporain</a></li><li><a href="/expositions?cat=photographie&style=documentaire">Documentaire</a></li><li><a href="/expositions?cat=photographie&style=experimental">Expérimental</a></li><li><a href="/expositions?cat=photographie&style=urbain">Urbain</a></li></ul>
+          </div>
+          <div class="navbar__mega-col">
+            <h4 class="navbar__mega-heading">Technique</h4>
+            <ul><li><a href="/expositions?cat=photographie&technique=argentique">Argentique</a></li><li><a href="/expositions?cat=photographie&technique=numerique">Numérique</a></li><li><a href="/expositions?cat=photographie&technique=cyanotype">Cyanotype</a></li></ul>
+          </div>
+          <div class="navbar__mega-col">
+            <h4 class="navbar__mega-heading">Sujet</h4>
+            <ul><li><a href="/expositions?cat=photographie&sujet=architecture">Architecture</a></li><li><a href="/expositions?cat=photographie&sujet=nature">Nature</a></li><li><a href="/expositions?cat=photographie&sujet=portrait">Portrait</a></li><li><a href="/expositions?cat=photographie&sujet=rue">Rue</a></li></ul>
+          </div>
+          <div class="navbar__mega-col">
+            <h4 class="navbar__mega-heading">Prix (€)</h4>
+            <ul><li><a href="/expositions?cat=photographie&prix=moins-500">Moins de 500</a></li><li><a href="/expositions?cat=photographie&prix=500-1000">500 – 1 000</a></li><li><a href="/expositions?cat=photographie&prix=1000-5000">1 000 – 5 000</a></li><li><a href="/expositions?cat=photographie&prix=plus-5000">Plus de 5 000</a></li></ul>
+          </div>
+        </div>
+
+        <!-- Dessin -->
+        <div class="navbar__mega-data" data-mega="dessin">
+          <div class="navbar__mega-col">
+            <h4 class="navbar__mega-heading">Style</h4>
+            <ul><li><a href="/expositions?cat=dessin&style=abstrait">Abstrait</a></li><li><a href="/expositions?cat=dessin&style=figuratif">Figuratif</a></li><li><a href="/expositions?cat=dessin&style=hyperrealisme">Hyperréalisme</a></li><li><a href="/expositions?cat=dessin&style=illustration">Illustration</a></li></ul>
+          </div>
+          <div class="navbar__mega-col">
+            <h4 class="navbar__mega-heading">Technique</h4>
+            <ul><li><a href="/expositions?cat=dessin&technique=crayon">Crayon</a></li><li><a href="/expositions?cat=dessin&technique=encre">Encre</a></li><li><a href="/expositions?cat=dessin&technique=fusain">Fusain</a></li><li><a href="/expositions?cat=dessin&technique=pastel-sec">Pastel sec</a></li></ul>
+          </div>
+          <div class="navbar__mega-col">
+            <h4 class="navbar__mega-heading">Sujet</h4>
+            <ul><li><a href="/expositions?cat=dessin&sujet=animal">Animal</a></li><li><a href="/expositions?cat=dessin&sujet=corps-humain">Corps humain</a></li><li><a href="/expositions?cat=dessin&sujet=nature">Nature</a></li><li><a href="/expositions?cat=dessin&sujet=portrait">Portrait</a></li></ul>
+          </div>
+          <div class="navbar__mega-col">
+            <h4 class="navbar__mega-heading">Prix (€)</h4>
+            <ul><li><a href="/expositions?cat=dessin&prix=moins-500">Moins de 500</a></li><li><a href="/expositions?cat=dessin&prix=500-1000">500 – 1 000</a></li><li><a href="/expositions?cat=dessin&prix=1000-5000">1 000 – 5 000</a></li><li><a href="/expositions?cat=dessin&prix=plus-5000">Plus de 5 000</a></li></ul>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
     <a href="/expositions">Expositions</a>
     <a href="#">Artistes</a>
     <a href="#">Galeries</a>
